@@ -6,9 +6,14 @@ const Inputs= (props) =>{
 
 
     const handleInput = (e) =>{
-        const value = e.target.value
-            setErrorMessage(props.func(value)) 
-            setInputValue(e.target.value)
+
+            const value = e.target.value
+
+            props.func && setErrorMessage(props.func(value)) 
+
+            setInputValue(value)
+
+            props.stateValue && props.stateValue(value) 
 
     }
 

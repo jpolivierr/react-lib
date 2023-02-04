@@ -1,7 +1,18 @@
 import Inputs from "./Fields/Inputs";
 import { numValidate } from "../../Util/numValidate";
+import { useSelector } from "react-redux";
+
+//Action
+import { filterAction } from "../../_state/actions";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const Filter = () =>{
+
+      const filterState = useSelector((state) => state.filterReducer)
+      console.log(filterState)
+
+      const {setLocation, setJobs} = bindActionCreators(filterAction, useDispatch())
 
      return(
         <form>
@@ -11,11 +22,13 @@ const Filter = () =>{
                      placeHolder="Enter city or Zip"
                      name = "location"
                      func = {numValidate}
+                     stateValue = {setLocation}
               />
                <Inputs 
                      label="Jobs"
                      placeHolder="Job"
                      name = "job"
+                     stateValue = {setJobs}
               />
         </form>
      )
