@@ -3,7 +3,7 @@ import { numValidate } from "../../Util/numValidate";
 import { useSelector } from "react-redux";
 
 //Action
-import { filterAction } from "../../_state/actions";
+import { filterAction, fetchAction } from "../../_state/actions";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useState } from "react";
@@ -16,6 +16,7 @@ const Filter = (props) =>{
       // const filterState = useSelector((state) => state.filterReducer)
       // console.log(filterState)
 
+      const {makeRequest} = bindActionCreators(fetchAction, useDispatch())
       const {setLocation, setJobs} = bindActionCreators(filterAction, useDispatch())
 
       const submit = (e) =>{
@@ -23,6 +24,7 @@ const Filter = (props) =>{
             e.preventDefault()
             setSubmitStatus(!submitStatus)   
             console.log("submitted")
+            makeRequest()
         
       }
 

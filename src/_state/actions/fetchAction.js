@@ -1,21 +1,77 @@
+export const SET_LOADING = "SET_LOADING"
 
-export const makeRequest = () =>{
+const handleRequestStatus = (request) =>{
+    
+    const dispatchResult = {
+        status : null,
+        errorMessage : null,
+        dispatchType : null,
+        responseData : null,
+    }
 
-    return (dispatch) => {
+    switch(request.status){
 
-         return async () =>{
-            // const res = await fetch("http://localhost:8080/process/account")
-            console.log("fetching")
-            
-            setTimeout(()=>{
+        case 200 :
+                dispatchResult.status = request.status
+                dispatchResult.dispatchType = 'fetchAccount'
+                dispatchResult.responseData = request.json()
+                break
+        default :
+                return dispatchResult
 
-            },3000)
+     }
+
+     return dispatchResult
+}
+
+
+
+const getRequest = async (url) =>{
+
+    const request = await fetch("https://jsonplaceholder.typicode.com/posts")
+    return handleRequestStatus(request)
+
+}
+
+
+export const makeRequest = (method, url, data, callBackFunc) =>{
+
+         
+         return async (dispatch) =>{
+
+            //Set loading to true
+            dispatch({
+                type: SET_LOADING,
+                payload: true
+            })
+           
+            let result
+
+            switch(method){
+
+                    case "GET" :
+                        result = await getRequest(url)
+                        break
+
+                    default :
+                        result = await getRequest(url)   
+         }
+
 
             dispatch({
-                type: 'fetchAccount',
-                payload: {status: "success"}
+                    type: result.dispatchType,
+                    payload: {status: result.responseData }
+                })
+
+
+             //Set loading to true
+             dispatch({
+                type: SET_LOADING,
+                payload: false
             })
+
+            
           }
 
-    }
+    
 }

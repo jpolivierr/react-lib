@@ -9,7 +9,7 @@ const Inputs= (props) =>{
 
     useEffect(()=>{
              if(props.required){
-                console.log("handle error")
+        
                         const err = emptyField(props.label, inputElement.current.value)
                         setErrorMessage(err)
              }        
