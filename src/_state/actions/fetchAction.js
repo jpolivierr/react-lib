@@ -1,68 +1,77 @@
 export const SET_LOADING = "SET_LOADING"
 
-const handleRequestStatus = (request) =>{
-    
-    const dispatchResult = {
-        status : null,
-        errorMessage : null,
-        dispatchType : null,
-        responseData : null,
-    }
-
-    switch(request.status){
-
-        case 200 :
-                dispatchResult.status = request.status
-                dispatchResult.dispatchType = 'fetchAccount'
-                dispatchResult.responseData = request.json()
-                break
-        default :
-                return dispatchResult
-
-     }
-
-     return dispatchResult
-}
-
-
-
-const getRequest = async (url) =>{
-
-    const request = await fetch("https://jsonplaceholder.typicode.com/posts")
-    return handleRequestStatus(request)
-
-}
-
 
 export const makeRequest = (method, url, data, callBackFunc) =>{
 
          
          return async (dispatch) =>{
 
+            let request
+            let status
+
+            const dispatchResult = {
+                status : null,
+                errorMessage : null,
+                dispatchType : null,
+                responseData : null,
+            }
+
+
             //Set loading to true
             dispatch({
                 type: SET_LOADING,
                 payload: true
             })
-           
-            let result
+
+            const config = {
+                method: method,
+            }
 
             switch(method){
 
                     case "GET" :
-                        result = await getRequest(url)
-                        break
-
+                         request = await fetch(url)
+                         status = request.status
+                         break
+                    case "POST" :
+                         if(data){
+                            config.body = data
+                            request = await fetch(url,config)          
+                            status = request.status
+                         }         
+                         break
                     default :
-                        result = await getRequest(url)   
+                        request = await fetch(url) 
+                          
+             }
+
+             switch(status){
+
+                case 200 :
+                        dispatchResult.status = status
+                        dispatchResult.dispatchType = 'fetchAccount'
+                        dispatchResult.responseData = await request.json()
+                        break
+                default :
+                        return dispatchResult
+        
+             }
+
+
+            
+         if(callBackFunc){
+
+            await callBackFunc(dispatchResult.responseData)
+
+         }else{
+
+                dispatch({
+                        type: dispatchResult.dispatchType,
+                        payload: dispatchResult.responseData 
+                    })
+
          }
-
-
-            dispatch({
-                    type: result.dispatchType,
-                    payload: {status: result.responseData }
-                })
-
+             
 
              //Set loading to true
              dispatch({
