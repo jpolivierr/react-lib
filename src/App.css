@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+fieldset{
+  border: none;
+  outline: none;
+}
 .App {
   text-align: center;
 }

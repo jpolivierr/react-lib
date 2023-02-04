@@ -7,7 +7,7 @@ import { filterAction } from "../../_state/actions";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const Filter = () =>{
+const Filter = (props) =>{
 
       const filterState = useSelector((state) => state.filterReducer)
       console.log(filterState)
@@ -15,8 +15,8 @@ const Filter = () =>{
       const {setLocation, setJobs} = bindActionCreators(filterAction, useDispatch())
 
      return(
-        <form>
-            <h2>Filter form</h2>
+        <form className={props.Class}>
+            {props.title && <h2>{props.title}</h2>}
              <Inputs 
                      label="Location"
                      placeHolder="Enter city or Zip"
