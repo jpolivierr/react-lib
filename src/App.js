@@ -4,7 +4,12 @@ import Filter from './components/Forms/Filter';
 function App() {
   return (
     <div className="App">
-         <Filter title="Quick Search" Class="filter-form"/>
+         <Filter 
+                  title="Quick Search" 
+                  Class="filter-form"
+                  buttonLabel="Submit"
+                  
+                  />
     </div>
   );
 }
