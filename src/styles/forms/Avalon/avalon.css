@@ -55,3 +55,39 @@
 .avalon button:hover{
     background-color: #cc004b;
 }
+
+
+/* ******************************************* 
+OPTIONS
+*********************************************
+*/
+
+.avalon .options{
+   position: relative;
+}
+
+.avalon .options input{
+    cursor: pointer;
+}
+
+.avalon .options .input-container i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 15px;
+    left: auto;
+    margin: auto;
+    height: max-content;
+    width: max-content;
+}
+
+.avalon .options .options-window{
+    position: absolute;
+    left: 0;
+    top: 110%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #82bbcc54;padding: 1rem;
+    width: 100%;
+    background: white;
+    border: 1px solid rgb(228, 227, 227);
+}

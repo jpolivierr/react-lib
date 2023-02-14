@@ -1,6 +1,6 @@
 import './App.css';
 import FilterForm from './components/Forms/Form';
-import { numValidate } from './Util/numValidate';
+import { numValidate } from './components/Forms/Util/numValidate';
 import { filterAction } from './_state/actions';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -43,11 +43,21 @@ function App() {
                     icon : <i className="fa-solid fa-location-dot"></i>
                   },
                   {
-                    type : "Jobs",
+                    type : "input",
                     label : "Jobs",
                     placeHolder : "Enter city or Zip",
                     name : "location",
                     fieldToUpdate : setLocation,
+                    // required : true
+                  },
+                  {
+                    type : "options",
+                    label : "Search Type",
+                    placeHolder : "Search Type",
+                    name : "search-type",
+                    fieldToUpdate : setLocation,
+                    icon : <i class="fa-sharp fa-solid fa-caret-down"></i>,
+                    comp : <h1>Hellothere</h1>
                     // required : true
                   },
                   // {

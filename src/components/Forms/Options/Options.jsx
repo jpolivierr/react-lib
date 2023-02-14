@@ -1,35 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { emptyField } from "../Util/emptyField";
+import { emptyField } from "../../../Util/emptyField";
 
-const Inputs= (props) =>{
+const Options = (props) =>{
 
     const [inputValue, setInputValue] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const inputElement = useRef();
 
     const {required, setFormError, formError, formStatus} = props
-
-    useEffect(()=>{
-            
-    },[formStatus])
-   
-    // useEffect(()=>{
-    //          if(props.required){
-
-    //             const err = emptyField(props.label, inputElement.current.value)
-
-                
-    //             if( err !== null){
-    //                  console.log(err)
-    //                 setErrorMessage(err)
-    //                 setFormError(true)
-    //             }
-                
-    //          }        
-    // },[props.formStatus])
-
-
-    
 
     const handleInput = (e) =>{
 
@@ -52,7 +30,7 @@ const Inputs= (props) =>{
     
 
      return(
-        <fieldset>
+        <fieldset className="options">
         {props.label && <label>{props.label}</label>}
         <div className="input-container">
              <input 
@@ -62,13 +40,18 @@ const Inputs= (props) =>{
                      value={inputValue}
                      onChange={e => handleInput(e)}
                      onBlur={()=>{handleBlur()}}
-                     style={props.icon && {paddingLeft: "2.3rem"}}
+                     style={props.icon && {paddingRight: "2.3rem"}}
+                     readOnly={true}
                      />
                      {props.icon && props.icon}
         </div>
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}         
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
+
+            <div className="options-window">
+                   {props.comp}
+            </div>      
          </fieldset>
      )
 }
 
-export default Inputs;
+export default Options;

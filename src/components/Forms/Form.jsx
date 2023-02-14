@@ -1,5 +1,5 @@
 import Inputs from "./Fields/Inputs";
-import { numValidate } from "../../Util/numValidate";
+import Options from "./Options/Options";
 import { useSelector } from "react-redux";
 
 //Action
@@ -51,27 +51,76 @@ const Filter = (props) =>{
              
       }
 
+      const getFields = (field,index) =>{
+         
+                     switch(field.type){
+                        
+                        case "input" :
+                              return (
+                                    <Inputs 
+                                       key={index}
+                                       label={field.label}
+                                       placeHolder={field.placeHolder}
+                                       name = {field.name}
+                                       onChangefunc = {field.onChangefunc}
+                                       fieldToUpdate = {field.fieldToUpdate}
+                                       formStatus={submitStatus}
+                                       required = {field.required}
+                                       formError = {formError}
+                                       setFormError = {setFormError}
+                                       icon = {field.icon}
+                                    />
+                              )
+                        case "options" :
+                           return (
+                                 <Options 
+                                    key={index}
+                                    label={field.label}
+                                    placeHolder={field.placeHolder}
+                                    name = {field.name}
+                                    onChangefunc = {field.onChangefunc}
+                                    fieldToUpdate = {field.fieldToUpdate}
+                                    formStatus={submitStatus}
+                                    required = {field.required}
+                                    formError = {formError}
+                                    setFormError = {setFormError}
+                                    icon = {field.icon}
+                                    comp = {field.comp}
+                                 />
+                           )
+
+                        default :
+                              return null
+                     }
+                
+            
+               
+               
+      }
+
 
      return(
         <form className={info.Class} onSubmit={e => submit(e)}>
             {info.title && <h2>{info.title}</h2>}
+           
              
              {
             
-              fields.map((el, index) => 
-                 <Inputs 
-                        key={index}
-                        label={el.label}
-                        placeHolder={el.placeHolder}
-                        name = {el.name}
-                        onChangefunc = {el.onChangefunc}
-                        fieldToUpdate = {el.fieldToUpdate}
-                        formStatus={submitStatus}
-                        required = {el.required}
-                        formError = {formError}
-                        setFormError = {setFormError}
-                        icon = {el.icon}
-                 />
+              fields.map((field, index) => 
+              getFields(field, index)
+               //   <Inputs 
+               //          key={index}
+               //          label={el.label}
+               //          placeHolder={el.placeHolder}
+               //          name = {el.name}
+               //          onChangefunc = {el.onChangefunc}
+               //          fieldToUpdate = {el.fieldToUpdate}
+               //          formStatus={submitStatus}
+               //          required = {el.required}
+               //          formError = {formError}
+               //          setFormError = {setFormError}
+               //          icon = {el.icon}
+               //   />
               )
              }
 
