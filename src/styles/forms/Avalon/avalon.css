@@ -1,0 +1,57 @@
+.avalon{
+    padding: 2rem;
+    border: 1px solid silver;
+    height: max-content;
+    max-width: 500px;
+}
+
+.avalon h2{
+    margin-bottom: 2rem;
+}
+
+.avalon label{
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.avalon fieldset{
+    margin-bottom: 1rem;
+}
+
+.avalon fieldset .input-container{
+    position: relative;
+}
+
+.avalon fieldset .input-container i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    margin: auto;
+    height: max-content;
+    width: max-content;
+}
+
+.avalon fieldset input{
+    border-radius: 100px;
+    outline: none;
+    padding: .9rem 1rem;
+    border: 1px solid #70879f;
+    width: 100%;
+}
+
+.avalon button{
+    background: #ff0965;
+    border-radius: 100px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 1rem;
+    cursor: pointer;
+    transition: .5s;
+    margin-top: 1rem;
+}
+
+.avalon button:hover{
+    background-color: #cc004b;
+}
