@@ -90,4 +90,5 @@ OPTIONS
     width: 100%;
     background: white;
     border: 1px solid rgb(228, 227, 227);
+    z-index: 1;
 }

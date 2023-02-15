@@ -9,3 +9,11 @@
 .text-right{
     text-align: right;
 }
+
+.show{
+    display: inherit;
+}
+
+.hide{
+    display: none;
+}

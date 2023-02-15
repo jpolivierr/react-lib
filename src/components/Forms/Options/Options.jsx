@@ -1,13 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { emptyField } from "../../../Util/emptyField";
+import {useRef, useState } from "react";
 
 const Options = (props) =>{
 
+    const state = props.dropdown[props.name]
     const [inputValue, setInputValue] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
+    const [optionState, setOptionState] = useState(state)
     const inputElement = useRef();
 
-    const {required, setFormError, formError, formStatus} = props
+    const {required, 
+           setFormError, 
+           formError, 
+           formStatus,
+           handleClick
+            } = props
 
     const handleInput = (e) =>{
 
@@ -27,12 +33,13 @@ const Options = (props) =>{
 
    
     
-    
+    const showStyle = state ? "show" : "hide"
 
      return(
         <fieldset className="options">
         {props.label && <label>{props.label}</label>}
-        <div className="input-container">
+        <div className="input-container" 
+                 onClick={()=>{handleClick(props.name)}}>
              <input 
                      ref={inputElement}
                      placeholder={props.placeHolder} 
@@ -46,8 +53,7 @@ const Options = (props) =>{
                      {props.icon && props.icon}
         </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-
-            <div className="options-window">
+            <div className={`options-window ${showStyle}`  }>
                    {props.comp}
             </div>      
          </fieldset>

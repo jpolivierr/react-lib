@@ -32,6 +32,15 @@ function App() {
              },
 
       fields : [
+                {
+                  type : "options",
+                  label : "Property",
+                  placeHolder : "Search Type",
+                  name : "property",
+                  fieldToUpdate : setLocation,
+                  icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                  comp : <h1>Index</h1>
+                },
                   {
                     type : "input",
                     label : "Location",
@@ -48,7 +57,6 @@ function App() {
                     placeHolder : "Enter city or Zip",
                     name : "location",
                     fieldToUpdate : setLocation,
-                    // required : true
                   },
                   {
                     type : "options",
@@ -56,17 +64,9 @@ function App() {
                     placeHolder : "Search Type",
                     name : "search-type",
                     fieldToUpdate : setLocation,
-                    icon : <i class="fa-sharp fa-solid fa-caret-down"></i>,
+                    icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
                     comp : <h1>Hellothere</h1>
-                    // required : true
                   },
-                  // {
-                  //   type : "Number",
-                  //   label : "phone",
-                  //   placeHolder : "Enter Phone Number",
-                  //   name : "phone",
-                  //   // required : true
-                  // }
                ]
   })
 

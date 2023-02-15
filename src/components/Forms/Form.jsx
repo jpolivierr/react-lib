@@ -1,6 +1,8 @@
 import Inputs from "./Fields/Inputs";
 import Options from "./Options/Options";
 import { useSelector } from "react-redux";
+import { FormProvider } from "./formContext";
+import fieldTypes from "./VARS/fieldType";
 
 //Action
 import { filterAction, fetchAction } from "../../_state/actions";
@@ -9,30 +11,56 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 
-const Filter = (props) =>{
+
+const Form = (props) =>{
+
+     const {fields,config, info} = props.setting
+
+     let formOptions = {}
+
+     fields.forEach((form)=>{
+
+          if(form.type === fieldTypes.OPTIONS){
+            formOptions[form.name] = false
+          }
+         
+     })
 
       const [submitStatus, setSubmitStatus] = useState(false)
       const [formError, setFormError] = useState(false)
-      // const requestReducer = useSelector ((state) => state.requestReducer)
-      //  console.log(requestReducer)
-      // const filterState = useSelector((state) => state.filterReducer)
-      // console.log(filterState)
-      //Reducers methods
-      // const jobsState = useSelector((state) => state.jobsReducer)
-
-
+      const [options, setOptions] = useState(formOptions)
 
       //Action methods
       const {makeRequest} = bindActionCreators(fetchAction, useDispatch())
-
-      const {setLocation, setJobs} = bindActionCreators(filterAction, useDispatch())
-
       const {updateJobs} = bindActionCreators(jobsAction, useDispatch())
 
-      const {fields,config, info} = props.setting
+      const handleOptions = (name) =>{
+
+          if(Object.keys(options) !== 0){
+
+               const optionsCopy = {...options}
+
+               for (const options in optionsCopy){
+
+                  
+                  if(options === name){
+                     optionsCopy[name] = !optionsCopy[name]
+                  }else{
+                     optionsCopy[options] = false
+                  }
+                  
+
+               }
+
+               
+               setOptions(optionsCopy)
+
+          }
+
+      }
+
 
       const submit = (e) =>{
-
           
                          e.preventDefault()
                         setFormError(false)
@@ -47,15 +75,14 @@ const Filter = (props) =>{
             //    // makeRequest(method,url,data,callBackFunc)
             //    console.log("success")
             //  }
-              
-             
+                 
       }
 
       const getFields = (field,index) =>{
          
                      switch(field.type){
                         
-                        case "input" :
+                        case fieldTypes.INPUT :
                               return (
                                     <Inputs 
                                        key={index}
@@ -71,7 +98,7 @@ const Filter = (props) =>{
                                        icon = {field.icon}
                                     />
                               )
-                        case "options" :
+                        case fieldTypes.OPTIONS :
                            return (
                                  <Options 
                                     key={index}
@@ -86,6 +113,8 @@ const Filter = (props) =>{
                                     setFormError = {setFormError}
                                     icon = {field.icon}
                                     comp = {field.comp}
+                                    handleClick = {handleOptions}
+                                    dropdown = {options}
                                  />
                            )
 
@@ -100,7 +129,8 @@ const Filter = (props) =>{
 
 
      return(
-        <form className={info.Class} onSubmit={e => submit(e)}>
+      <FormProvider data={{num: 5}}>
+         <form className={info.Class} onSubmit={e => submit(e)}>
             {info.title && <h2>{info.title}</h2>}
            
              
@@ -108,19 +138,7 @@ const Filter = (props) =>{
             
               fields.map((field, index) => 
               getFields(field, index)
-               //   <Inputs 
-               //          key={index}
-               //          label={el.label}
-               //          placeHolder={el.placeHolder}
-               //          name = {el.name}
-               //          onChangefunc = {el.onChangefunc}
-               //          fieldToUpdate = {el.fieldToUpdate}
-               //          formStatus={submitStatus}
-               //          required = {el.required}
-               //          formError = {formError}
-               //          setFormError = {setFormError}
-               //          icon = {el.icon}
-               //   />
+
               )
              }
 
@@ -129,7 +147,9 @@ const Filter = (props) =>{
                      {config.buttonLabel}
             </button>
         </form>
+      </FormProvider>
+        
      )
 }
 
-export default Filter;
+export default Form;
