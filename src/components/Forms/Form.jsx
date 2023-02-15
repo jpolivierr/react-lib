@@ -26,6 +26,7 @@ const Form = (props) =>{
          
      })
 
+      
       const [submitStatus, setSubmitStatus] = useState(false)
       const [formError, setFormError] = useState(false)
       const [options, setOptions] = useState(formOptions)
@@ -36,22 +37,22 @@ const Form = (props) =>{
 
       const handleOptions = (name) =>{
 
+
+
           if(Object.keys(options) !== 0){
+
 
                const optionsCopy = {...options}
 
                for (const options in optionsCopy){
-
-                  
+           
                   if(options === name){
                      optionsCopy[name] = !optionsCopy[name]
                   }else{
                      optionsCopy[options] = false
                   }
                   
-
                }
-
                
                setOptions(optionsCopy)
 

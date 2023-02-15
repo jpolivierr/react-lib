@@ -1,9 +1,19 @@
+/* ******************************************* 
+FORM
+*********************************************
+*/
+
 .avalon{
     padding: 2rem;
     border: 1px solid silver;
     height: max-content;
     max-width: 500px;
 }
+
+/* ******************************************* 
+LABEL AND HEADER
+*********************************************
+*/
 
 .avalon h2{
     margin-bottom: 2rem;
@@ -13,6 +23,11 @@
     display: block;
     margin-bottom: .5rem;
 }
+
+/* ******************************************* 
+FIELDS
+*********************************************
+*/
 
 .avalon fieldset{
     margin-bottom: 1rem;
@@ -40,23 +55,6 @@
     width: 100%;
 }
 
-.avalon button{
-    background: #ff0965;
-    border-radius: 100px;
-    color: white;
-    border: none;
-    font-weight: bold;
-    padding: 1rem;
-    cursor: pointer;
-    transition: .5s;
-    margin-top: 1rem;
-}
-
-.avalon button:hover{
-    background-color: #cc004b;
-}
-
-
 /* ******************************************* 
 OPTIONS
 *********************************************
@@ -79,6 +77,7 @@ OPTIONS
     margin: auto;
     height: max-content;
     width: max-content;
+    cursor: pointer;
 }
 
 .avalon .options .options-window{
@@ -91,4 +90,25 @@ OPTIONS
     background: white;
     border: 1px solid rgb(228, 227, 227);
     z-index: 1;
+}
+
+/* ******************************************* 
+BUTTON
+*********************************************
+*/
+.avalon button{
+    background: #ff0965;
+    border-radius: 100px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 1rem;
+    cursor: pointer;
+    transition: .5s;
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+
+.avalon button:hover{
+    background-color: #cc004b;
 }
