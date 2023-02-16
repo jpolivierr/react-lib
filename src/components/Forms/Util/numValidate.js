@@ -1,10 +1,10 @@
-export const numValidate = (value) =>{
+export const numValidate = (key, value) =>{
  
     try {
         if(value && isNaN(Number(value))){
-           return "Not a number"
+           return key + " is not a number"
         }else{
-            return ""
+            return false
         }
     } catch (error) {
         console.log(error.message())

@@ -7,26 +7,29 @@ const Inputs= (props) =>{
     const [errorMessage, setErrorMessage] = useState("")
     const inputElement = useRef();
 
-    const {required, setFormError, formError, formStatus} = props
+    const {name, required, setFormError, formError, formStatus} = props
 
-    useEffect(()=>{
-            
-    },[formStatus])
-   
+
+    // console.log(formError)
     // useEffect(()=>{
-    //          if(props.required){
+            
+    // },[formStatus])
+   
+    useEffect(()=>{
+            //  if(props.required){
 
-    //             const err = emptyField(props.label, inputElement.current.value)
+            //     const err = emptyField(props.label, inputElement.current.value)
 
                 
-    //             if( err !== null){
-    //                  console.log(err)
-    //                 setErrorMessage(err)
-    //                 setFormError(true)
-    //             }
+            //     if( err !== null){
+            //          console.log(err)
+            //         setErrorMessage(err)
+            //         setFormError(true)
+            //     }
                 
-    //          }        
-    // },[props.formStatus])
+            //  }     
+            setErrorMessage(formError[name])   
+    },[formError[name]])
 
 
     
@@ -34,6 +37,10 @@ const Inputs= (props) =>{
     const handleInput = (e) =>{
 
             const value = e.target.value
+
+            setErrorMessage("")
+
+            props.updateFormField(props.name, value) 
 
             props.onChangefunc && setErrorMessage(props.onChangefunc(value)) 
 
@@ -46,9 +53,6 @@ const Inputs= (props) =>{
     const handleBlur = () =>{
       
     }
-
-   
-    
     
 
      return(
@@ -66,7 +70,7 @@ const Inputs= (props) =>{
                      />
                      {props.icon && props.icon}
         </div>
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}         
+            {formError[name] && <p>{formError[name]}</p>}         
          </fieldset>
      )
 }

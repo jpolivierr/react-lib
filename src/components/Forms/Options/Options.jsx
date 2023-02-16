@@ -1,4 +1,4 @@
-import {useRef, useState } from "react";
+import {useEffect, useRef, useState } from "react";
 
 const Options = (props) =>{
 
@@ -15,11 +15,17 @@ const Options = (props) =>{
            handleClick
             } = props
 
+
+    useEffect(()=>{
+
+    },[])
+
+
     const handleInput = (e) =>{
 
             const value = e.target.value
 
-            props.onChangefunc && setErrorMessage(props.onChangefunc(value)) 
+            props.onChangefunc && props.onChangefunc(value)
 
             setInputValue(value)
 

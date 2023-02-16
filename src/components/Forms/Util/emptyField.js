@@ -3,7 +3,7 @@ export const emptyField = (name, value) =>{
         if(!value){
             return name + " is required"
         }else{
-            return null;
+            return false;
         }
     } catch (error) {
         console.log(error)

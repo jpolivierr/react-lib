@@ -33,6 +33,11 @@ FIELDS
     margin-bottom: 1rem;
 }
 
+.avalon fieldset p{
+    color: red;
+    margin-top: .5rem;
+    font-size: .8rem;
+}
 .avalon fieldset .input-container{
     position: relative;
 }
