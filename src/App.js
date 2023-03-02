@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useState } from 'react';
 import Lists from './components/List/Lists';
-import "./styles/forms/Avalon/avalon.css"
 import { emptyField } from './components/Forms/Util/emptyField';
 import { numValidate } from './components/Forms/Util/numValidate';
-import "./styles/utility.css"
+import TopNav from './components/Navigation/topNav';
+import "./styles/index.js"
 
 // Utility functions
 
@@ -27,6 +27,7 @@ function App() {
   const listFunc = (name) =>{
    
     return name + " I'm new here"
+
   }
 
 
@@ -158,6 +159,7 @@ function App() {
 
   return (
     <div className="App">
+         <TopNav Class="top-nav"/>
          <FilterForm setting = {formSetting} />
     </div>
   );
