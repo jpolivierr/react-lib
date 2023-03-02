@@ -7,32 +7,21 @@ const Inputs= (props) =>{
     const [errorMessage, setErrorMessage] = useState("")
     const inputElement = useRef();
 
-    const {name, required, setFormError, formError, formStatus} = props
+    const {name, 
+           required, 
+           setFormError,
+           formError,
+           formStatus,
+           defaultValue
+            } = props
 
 
-    // console.log(formError)
-    // useEffect(()=>{
             
-    // },[formStatus])
-   
     useEffect(()=>{
-            //  if(props.required){
-
-            //     const err = emptyField(props.label, inputElement.current.value)
-
-                
-            //     if( err !== null){
-            //          console.log(err)
-            //         setErrorMessage(err)
-            //         setFormError(true)
-            //     }
-                
-            //  }     
-            setErrorMessage(formError[name])   
-    },[formError[name]])
-
-
-    
+        if(defaultValue){
+                setInputValue(defaultValue)
+              }
+    },[defaultValue])
 
     const handleInput = (e) =>{
 

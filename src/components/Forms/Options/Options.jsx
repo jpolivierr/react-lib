@@ -2,36 +2,100 @@ import {useEffect, useRef, useState } from "react";
 
 const Options = (props) =>{
 
-    const state = props.dropdown[props.name]
     const [inputValue, setInputValue] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
-    const [optionState, setOptionState] = useState(state)
-    const inputElement = useRef();
+    const [optionState, setOptionState] = useState(false)
+    const windowRef = useRef(null);
 
     const {required, 
            setFormError, 
            formError, 
            formStatus,
-           handleClick
+           fieldToUpdate,
+           list,
+           defaultValue,
+           name,
+           updateFormField
             } = props
 
 
     useEffect(()=>{
 
+      if(defaultValue){
+
+        setInputValue(defaultValue)
+
+      }
+
+    },[defaultValue])
+
+    useEffect(()=>{
+    
+        const addEvent = (e) =>{
+
+            if(windowRef.current && !windowRef.current.contains(e.target)){
+
+                setOptionState(false)
+
+            }
+
+        }
+        document.addEventListener("click",addEvent, true)
+
     },[])
 
+    const handleClick = ( name, funcArray) =>{
 
-    const handleInput = (e) =>{
+      if(Array.isArray(funcArray) && funcArray.length > 0){
 
-            const value = e.target.value
+           let newValue 
 
-            props.onChangefunc && props.onChangefunc(value)
+            funcArray.forEach((func)=>{
 
-            setInputValue(value)
+                newValue = func(name)
 
-            props.fieldToUpdatee && props.fieldToUpdate(value) 
+            })
+
+            handleInput(newValue)
+
+            listToggleWindow()
+
+        }else{
+
+            handleInput(name)
+
+            listToggleWindow()
+        }
+        
+    }
+
+    const listToggleWindow = () =>{
+
+        if(list.info.listPreventExit){
+
+            return
+
+        }else{
+
+            setOptionState(!optionState)
+
+        }
+    }
+
+    const toggleWindow = () =>{
+
+        setOptionState(!optionState)
 
     }
+
+    const handleInput = (value) =>{
+
+        setInputValue(value)
+        fieldToUpdate && fieldToUpdate(value)
+        updateFormField && updateFormField(name,value)
+
+    }
+    
 
     const handleBlur = () =>{
       
@@ -39,19 +103,17 @@ const Options = (props) =>{
 
    
     
-    const showStyle = state ? "show" : "hide"
+    const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options">
+        <fieldset className="options" ref={windowRef}>
         {props.label && <label>{props.label}</label>}
         <div className="input-container" 
-                 onClick={()=>{handleClick(props.name)}}>
+                 onClick={()=>{toggleWindow()}}>
              <input 
-                     ref={inputElement}
                      placeholder={props.placeHolder} 
                      name={props.name}
                      value={inputValue}
-                     onChange={e => handleInput(e)}
                      onBlur={()=>{handleBlur()}}
                      style={props.icon && {paddingRight: "2.3rem"}}
                      readOnly={true}
@@ -60,8 +122,29 @@ const Options = (props) =>{
         </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             <div className={`options-window ${showStyle}`  }>
-                   {props.comp}
-            </div>      
+                   {/* {props.comp} */}
+                    <ul className={list.info.Class}>
+                        {list.info.title && <h3>{list.info.title}</h3>}
+
+                        {
+                          list.lists.map((li,index) => (
+                            <li
+                                 key={index}
+                                 className={li.Class}
+                                 listid={li.name}
+                                 onClick={(e)=>{
+                                    handleClick(li.name,li.handleClick)
+                                }}
+                               >
+                                {
+                                    li.el && li.el
+                                }
+                            </li>
+                          ))
+                        }
+                    </ul>
+            </div> 
+            {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )
 }

@@ -1,7 +1,7 @@
 import './App.css';
 import FilterForm from './components/Forms/Form';
 import { filterAction } from './_state/actions';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useState } from 'react';
 import Lists from './components/List/Lists';
@@ -18,9 +18,17 @@ function App() {
   // Action methods
   const {setLocation, setJobs} = bindActionCreators(filterAction, useDispatch())
 
-  const listFunc = (e) =>{
-    console.log(e.target)
+  const filterState = useSelector((state)=> {return state.filterReducer})
+  
+  const location = filterState.location  
+  const theJob = filterState.jobs 
+
+
+  const listFunc = (name) =>{
+   
+    return name + " I'm new here"
   }
+
 
   function func1(data){
     console.log("func1: " + data)
@@ -42,16 +50,19 @@ function App() {
   const [myList] = useState({
               info: {
                         title: "Property Type",
-                        Class: "listStyle"
+                        Class: "listStyle",
+                        listPreventExit: true
               },
               lists: [
                       {
+                        name: "list 1",
                         el: <p>List 1</p>,
-                        handleClick: listFunc,
+                        handleClick: [listFunc],
                         href: [],
                         Class: "listClass"
                       },
                       {
+                        name: "list 2",
                         el: <p>List 2</p>,
                         handleClick: listFunc,
                         href: [],
@@ -59,6 +70,29 @@ function App() {
                       },
                     ] 
   })
+
+  const [myList2] = useState({
+    info: {
+              title: "Property Type",
+              Class: "listStyle",
+    },
+    lists: [
+            {
+              name: "list 1",
+              el: <p>List 1</p>,
+              handleClick: [listFunc],
+              href: [],
+              Class: "listClass"
+            },
+            {
+              name: "list 2",
+              el: <p>List 2</p>,
+              handleClick: listFunc,
+              href: [],
+              Class: "listClass"
+            },
+          ] 
+})
 
   // Form Settings
   const [formSetting] = useState({
@@ -69,7 +103,9 @@ function App() {
                  data : null,
                  buttonLabel: "Submit",
       },
-
+      state: {
+      
+      },
       info : {
                 title: "Quick Search",
                 Class: "avalon text-left"
@@ -79,11 +115,13 @@ function App() {
                 {
                   type : "options",
                   label : "Property",
-                  placeHolder : "Search Type",
+                  placeHolder : "Search Properties",
                   name : "property",
                   fieldToUpdate : setLocation,
                   icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
-                   comp : <Lists list={myList}/>
+                  list : myList,
+                  defaultValue : location,
+                  onSubmitFunc: [emptyField],
                 },
                 {
                   type : "options",
@@ -92,7 +130,8 @@ function App() {
                   name : "search-type",
                   fieldToUpdate : setLocation,
                   icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
-                  comp : <h1>Hellothere</h1>
+                  list : myList2,
+                  onSubmitFunc: [emptyField],
                 },
                   {
                     type : "input",
@@ -112,6 +151,7 @@ function App() {
                     name : "job",
                     onSubmitFunc: [emptyField],
                     fieldToUpdate : setLocation,
+                    defaultValue : theJob
                   }
                ]
   })

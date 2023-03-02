@@ -1,6 +1,8 @@
 import Inputs from "./Fields/Inputs";
 import Options from "./Options/Options";
 import fieldTypes from "./VARS/fieldType";
+import { myFormFieds } from "./Config/getFields";
+import { validateFields } from "./Config/formValidation";
 
 //Action
 import { useState } from "react";
@@ -9,101 +11,40 @@ import { useState } from "react";
 const Form = (props) =>{
 
      const {fields,config, info} = props.setting
-
-
-     const setFormOptions = () =>{
-               let formOptions = {}
-
-            fields.forEach((form)=>{
-
-                  if(form.type === fieldTypes.OPTIONS){
-                     formOptions[form.name] = false
-                  }
-                  
-            })
-
-            return formOptions
-     }
-
-     const myFormFieds = () => {
-            let formFields = {}
-
-            fields.forEach((field)=>{
-            
-               if(field.name){
-                  formFields[field.name] = ""
-               }
-         })
-         return formFields
-     }
-
-     const fieldsErrors = () =>{
-               let fieldsErrors = {}
-
-               fields.forEach((field)=>{
-
-                  if(field.name){
-                     fieldsErrors[field.name] = false
-                  }
-                  
-            })
-            return fieldsErrors
-     }
       
       const [submitStatus, setSubmitStatus] = useState(false)
-      const [formError, setFormError] = useState(fieldsErrors)
-      const [options, setOptions] = useState(setFormOptions)
-      const [formFields, setFormFields] = useState(myFormFieds)
+      const [formError, setFormError] = useState(myFormFieds(fields).errors)
+      const [formFields, setFormFields] = useState(myFormFieds(fields).fields)
 
       const updateError = (key, value) =>{
+
          if((key in formError)){
-               console.log(formError)
+               
                const formErrorCopy = {...formError}
+
                formErrorCopy[key] = value
-               console.log(formErrorCopy)
+
                setFormError(formErrorCopy)
          }
+
       }
 
       const updateFormField = (key, value) =>{
 
          if((key in formFields)){
+
                const formFieldCopy = {...formFields}
+
                formFieldCopy[key] = value
+
                setFormFields(formFieldCopy)
          }
       }
 
-      const handleOptions = (name) =>{
-
-          if(Object.keys(options) !== 0){
-
-
-               const optionsCopy = {...options}
-
-               for (const options in optionsCopy){
-           
-                  if(options === name){
-
-                     optionsCopy[name] = !optionsCopy[name]
-
-                  }else{
-
-                     optionsCopy[options] = false
-                  }
-                  
-               }
-               
-               setOptions(optionsCopy)
-
-          }
-
-      }
-
-      const validateFields = (formFields) =>{
+      const validateFields = () =>{
          
          const formErrorCopy = {...formError}
-
+         formErrorCopy.errors = false
          fields.forEach((field)=>{
 
                 const fieldData = formFields[field.name]
@@ -119,13 +60,13 @@ const Form = (props) =>{
                         const funcResult = call(field.name, fieldData)
 
                         if(funcResult){
-                           // console.log(funcResult)
-                           // updateError(field.name, funcResult)
+                     
                            formErrorCopy[field.name] = funcResult
+                           formErrorCopy.errors = true
                            break
+
                         }else{
                            formErrorCopy[field.name] = false
-
                         }
 
                      }
@@ -135,25 +76,24 @@ const Form = (props) =>{
 
          setFormError(formErrorCopy)
 
+         return formErrorCopy
+
       }
 
       const submit = (e) =>{
 
-                          e.preventDefault()
-                          validateFields(formFields)
-              
-                        // setSubmitStatus(!submitStatus)   
-                  
-                        // const url = config.url
-                        // const method = config.method
-                        // const data = config.data
-                        // const callBackFunc = updateJobs
-                        // console.log(formError)
-            //  if(!formError){
-            //    // makeRequest(method,url,data,callBackFunc)
-            //    console.log("success")
-            //  }
-                 
+                       e.preventDefault()
+                        
+                       if(validateFields().errors){
+
+                           console.log("error found")
+
+                       }else{
+
+                           console.log("Submit")
+                           
+                       }
+                               
       }
 
       const getFields = (field,index) =>{
@@ -176,6 +116,7 @@ const Form = (props) =>{
                                        icon = {field.icon}
                                        updateFormField = {updateFormField}
                                        updateError = {updateError}
+                                       defaultValue = {field.defaultValue}
                                     />
                               )
                         case fieldTypes.OPTIONS :
@@ -192,11 +133,11 @@ const Form = (props) =>{
                                     formError = {formError}
                                     setFormError = {setFormError}
                                     icon = {field.icon}
-                                    comp = {field.comp}
-                                    handleClick = {handleOptions}
-                                    dropdown = {options}
+                                    list = {field.list}
+                                    // handleClick = {handleOptions}
                                     updateFormField = {updateFormField}
                                     updateError = {updateError}
+                                    defaultValue = {field.defaultValue}
                                  />
                            )
 
@@ -205,8 +146,6 @@ const Form = (props) =>{
                      }
                 
             
-               
-               
       }
 
 
