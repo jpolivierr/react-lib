@@ -11,7 +11,7 @@
     background: white;
     position: absolute;
     right: 0;
-    width: 300px;
+    width: max-content;
     height: 100vh;
     top: 0;
     padding: 3rem 1.5rem;

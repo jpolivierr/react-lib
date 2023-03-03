@@ -1,5 +1,5 @@
 import './App.css';
-import FilterForm from './components/Forms/Form';
+import FilterForm from './modules/Forms/Form';
 import { filterAction } from './_state/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
