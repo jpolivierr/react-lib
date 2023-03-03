@@ -57,8 +57,8 @@ const TopNav = (props) =>{
                          animated={{time: 300, motion}}
                          motionType="slide-left"
                          seconds=".3s"
-                         from="0"
-                         to="1"
+                         from="-300px"
+                         to="0"
                        />
             </Modal>
         </header>

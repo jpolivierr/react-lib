@@ -1,4 +1,4 @@
-import Animation from "../../../components/Animation/animation"
+import ModalAnimation from "../ModalAnimation/animation"
 import getMotion from "../Util/getMotion"
 
 const ModalSideWindow = (props) =>{
@@ -39,13 +39,13 @@ const ModalSideWindow = (props) =>{
                 {context}
         </div>
 
-        <Animation 
+        <ModalAnimation
            type = {motionType}
            seconds = {seconds}
            from = {from}
            to = {to}
         />
-        
+
         </>
         
     

@@ -1,4 +1,4 @@
-import Animation from "../../../components/Animation/animation"
+import ModalAnimation from "../ModalAnimation/animation"
 import getMotion from "../Util/getMotion"
 
 const ModalOverlay = (props) =>{
@@ -32,7 +32,7 @@ const ModalOverlay = (props) =>{
     return(
         <>
         <div  className={`modal-bk ${getMotion(motionType, motion)}`} onClick={handleClick}/>
-        <Animation 
+        <ModalAnimation
            type = {motionType}
            seconds = {seconds}
            from = {from}
