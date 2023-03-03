@@ -3,7 +3,9 @@ import getMotion from "../Util/getMotion"
 
 const ModalSideWindow = (props) =>{
 
-    const {toggle,
+    const {
+           children,
+           toggle,
            context,
            motionType,
            animated,
@@ -36,7 +38,7 @@ const ModalSideWindow = (props) =>{
         <div className={`modal-window ${getMotion(motionType, motion)}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={handleClick}><span>+</span>
             </div>
-                {context}
+                {children}
         </div>
 
         <ModalAnimation
