@@ -1,48 +1,89 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import ModalSideWindow from './Windows/modalSideWindow';
 
-const Modal = ({ isShowing, hide }) => {
+const Modal = (props) => {
 
-// isShowing ? ReactDOM.createPortal(
-//   <React.Fragment>
-//     <div className="modal-overlay"/>
-//     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-//       <div className="modal">
-//         <div className="modal-header">
-//           <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
-//             <span aria-hidden="true">&times;</span>
-//           </button>
-//         </div>
-//         <p>
-//           Hello, I'm a modal.
-//         </p>
-//       </div>
-//     </div>
-//   </React.Fragment>, document.body
-// ) : null
+    const {isShowing,toggle, animated, type} = props
+
+    const modalEl = useRef(null)
+
+   let time = null
+
+    let motion = null
+
+    if(animated){
+        time = !animated.time ? -1 : animated.time
+        motion = animated.motion ? true : animated.motion === false ? false : null
+    }
+
+    
+
+    useEffect(()=>{
+        
+    },[isShowing])
+
+
+
+const handleClick = () =>{
+
+    toggle(time)
+
+}    
+
+const getMotion = (type) =>{
+
+
+    switch(type){
+
+        case "fade" :
+            return motion ? `fadeIn` : motion === false ? `fadeOut` : null
+        default :
+            return ""
+
+    }
+}
+
+const window = () =>{
+     switch(type){
+
+        case "side" :
+            return <ModalSideWindow 
+                         time={time}
+                         motion={motion}
+                         handleClick={handleClick}
+                       />
+        default :
+            return null
+
+     }
+}
 
 const renderModal = () =>{
+
     return ReactDOM.createPortal(
-        <React.Fragment>
-          <div className="modal-overlay"/>
-          <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-            <div className="modal">
-              <div className="modal-header">
-                <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <p>
-                Hello, I'm a modal.
-              </p>
-            </div>
-          </div>
-        </React.Fragment>, document.body
+        <>
+          <div ref={modalEl} className={`modal-bk ${getMotion("fade")}`} onClick={handleClick}/>
+
+             {window()}
+
+        </>, document.querySelector(".App")
       )
+
+}
+
+const render = () => {
+    
+         if(isShowing){
+            return renderModal()
+        }else{
+            return null
+        }
+   
 }
 
 return(
-       isShowing ? renderModal() : null
+       render()
 )
 
 };

@@ -171,7 +171,7 @@ function App() {
          />
          <Modal
             isShowing={isShowing}
-            hide={toggle}
+             toggle={toggle}
             />
     </div>
   );

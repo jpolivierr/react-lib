@@ -6,7 +6,7 @@ import Modal from "../../Hooks/Modal/modal"
 const TopNav = (props) =>{
 
     const {logo, Class, lists} = props
-    const {isShowing, toggle, } = useModal();
+    const {isShowing, toggle, motion } = useModal();
     return(
         <header className={Class}>
 
@@ -37,8 +37,15 @@ const TopNav = (props) =>{
 
             
             <Modal
-            isShowing={isShowing}
-            hide={toggle}
+
+                isShowing={isShowing}
+
+                toggle={toggle}
+
+                animated={{time: 300, motion}}
+
+                type="side"
+                
             />
         </header>
     )
