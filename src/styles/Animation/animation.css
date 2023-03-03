@@ -22,3 +22,28 @@
     }
 }
 
+
+.slide-left{
+    animation: slideLeft .3s forwards;
+}
+
+@keyframes slideLeft {
+    from{
+        right: -300px;
+    }to{
+        right: 0;
+    }
+}
+
+.close-slide-left{
+    animation: closeSlideLeft .3s forwards;
+}
+
+@keyframes closeSlideLeft {
+    from{
+        right: 0;
+    }to{
+        right: -300px;
+    }
+}
+

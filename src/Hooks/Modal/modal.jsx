@@ -13,8 +13,11 @@ const Modal = (props) => {
     let motion = null
 
     if(animated){
+
         time = !animated.time ? -1 : animated.time
+
         motion = animated.motion ? true : animated.motion === false ? false : null
+
     }
 
     
@@ -33,11 +36,12 @@ const handleClick = () =>{
 
 const getMotion = (type) =>{
 
-
     switch(type){
 
         case "fade" :
             return motion ? `fadeIn` : motion === false ? `fadeOut` : null
+        case "slide-left" :
+            return motion ? `slide-left` : motion === false ? `close-slide-left` : null
         default :
             return ""
 
@@ -50,7 +54,7 @@ const window = () =>{
         case "side" :
             return <ModalSideWindow 
                          time={time}
-                         motion={motion}
+                         motion={getMotion("slide-left")}
                          handleClick={handleClick}
                        />
         default :
