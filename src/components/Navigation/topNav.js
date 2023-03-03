@@ -1,6 +1,8 @@
 import Buttons from "../Buttons/button"
 import useModal from "../../Hooks/Modal/useModal"
 import Modal from "../../Hooks/Modal/modal"
+import ModalSideWindow from "../../Hooks/Modal/Windows/modalSideWindow"
+import ModalOverlay from "../../Hooks/Modal/Overlays/modalOverlay"
 
 
 const TopNav = (props) =>{
@@ -37,16 +39,28 @@ const TopNav = (props) =>{
 
             
             <Modal
-
                 isShowing={isShowing}
-
                 toggle={toggle}
-
                 animated={{time: 300, motion}}
-
                 type="side"
-                
-            />
+            >
+                <ModalOverlay
+                    toggle={toggle}
+                    animated={{time: 300, motion}}
+                    motionType="fade"
+                    seconds=".3s"
+                    from="0"
+                    to="1"
+                />
+                <ModalSideWindow 
+                         toggle={toggle}
+                         animated={{time: 300, motion}}
+                         motionType="slide-left"
+                         seconds=".3s"
+                         from="0"
+                         to="1"
+                       />
+            </Modal>
         </header>
     )
 }

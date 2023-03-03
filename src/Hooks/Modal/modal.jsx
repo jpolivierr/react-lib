@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import ModalSideWindow from './Windows/modalSideWindow';
+import Animation from '../../components/Animation/animation';
 
 const Modal = (props) => {
 
-    const {isShowing,toggle, animated, type} = props
+    const {isShowing,toggle, animated, type, children} = props
 
     const modalEl = useRef(null)
 
@@ -67,27 +68,36 @@ const renderModal = () =>{
 
     return ReactDOM.createPortal(
         <>
-          <div ref={modalEl} className={`modal-bk ${getMotion("fade")}`} onClick={handleClick}/>
-
-             {window()}
-
+          {/* <div ref={modalEl} className={`modal-bk ${getMotion("fade")}`} onClick={handleClick}/> */}
+             {/* {window()} */}
+             {children}
+             {/* <Animation 
+                type = "fade"
+                seconds = ".4s"
+                from = "0"
+                to = "1"
+              /> */}
         </>, document.querySelector(".App")
       )
 
 }
 
-const render = () => {
+// const render = () => {
     
-         if(isShowing){
-            return renderModal()
-        }else{
-            return null
-        }
+//          if(isShowing){
+
+//             return renderModal()
+
+//         }else{
+
+//             return null
+
+//         }
    
-}
+// }
 
 return(
-       render()
+       isShowing ? renderModal() : null
 )
 
 };

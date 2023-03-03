@@ -1,25 +1,51 @@
-
+import Animation from "../../../components/Animation/animation"
+import getMotion from "../Util/getMotion"
 
 const ModalSideWindow = (props) =>{
 
-    const {handleClick, context, time, motion} = props
-    const appElement = document.querySelector(".App")
+    const {toggle,
+           context,
+           motionType,
+           animated,
+           seconds,
+           from,
+           to
+        } = props
 
-    const style = ` <p>Helo</p>
-    `
+        let time = null
 
-    const styleEl = document.createElement("style")
-    styleEl.innerHTML = style
+        let motion = null
+    
+        if(animated){
+    
+            time = !animated.time ? -1 : animated.time
+    
+            motion = animated.motion ? true : animated.motion === false ? false : null
+    
+        }
 
-    appElement.appendChild(styleEl)
+    const handleClick = () =>{
+
+        toggle(time)
+    
+    } 
 
     return(
         <>
-        <div className={`modal-window ${motion}`}>
+        
+        <div className={`modal-window ${getMotion(motionType, motion)}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={handleClick}><span>+</span>
             </div>
                 {context}
         </div>
+
+        <Animation 
+           type = {motionType}
+           seconds = {seconds}
+           from = {from}
+           to = {to}
+        />
+        
         </>
         
     
