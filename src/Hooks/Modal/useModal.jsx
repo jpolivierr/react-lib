@@ -1,18 +1,20 @@
+import { useState } from 'react';
+import ReactDOM from 'react-dom';
 
-const useModal = () =>{
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
+const useModal = () => {
+  const [isShowing, setIsShowing] = useState(false);
 
-    const toggle = () =>{
+  function toggle() {
+    setIsShowing(!isShowing);
+  }
 
-        console.log("modal here")
-        
-        setIsModalOpen(!isModalOpen)
 
-    }
+  return {
+    isShowing,
+    toggle,
 
-    return {toggle}
+  }
+};
 
-}
-
-export default useModal
+export default useModal;

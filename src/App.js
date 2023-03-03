@@ -8,6 +8,9 @@ import Lists from './components/List/Lists';
 import { emptyField } from './components/Forms/Util/emptyField';
 import { numValidate } from './components/Forms/Util/numValidate';
 import TopNav from './components/Navigation/topNav';
+import useModal from './Hooks/Modal/useModal';
+import Modal from './Hooks/Modal/modal';
+import Buttons from './components/Buttons/button';
 import "./styles/index.js"
 
 // Utility functions
@@ -22,7 +25,8 @@ function App() {
   
   const location = filterState.location  
   const theJob = filterState.jobs 
-
+  
+  const {isShowing, toggle, } = useModal();
 
   const listFunc = (name) =>{
    
@@ -161,6 +165,14 @@ function App() {
     <div className="App">
          <TopNav Class="top-nav"/>
          <FilterForm setting = {formSetting} />
+         <Buttons 
+            clickEvent={toggle}
+            el="click"
+         />
+         <Modal
+            isShowing={isShowing}
+            hide={toggle}
+            />
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import Buttons from "../Buttons/button"
+import useModal from "../../Hooks/Modal/useModal"
+import Modal from "../../Hooks/Modal/modal"
+
 
 const TopNav = (props) =>{
 
     const {logo, Class, lists} = props
+    const {isShowing, toggle, } = useModal();
     return(
         <header className={Class}>
 
@@ -25,14 +29,17 @@ const TopNav = (props) =>{
           }
 
           <Buttons
-
-             el ="Submit"
+             clickEvent = {toggle}
+             el="Submit"
              Class="main-btn"
           />
             </section>
 
             
-            
+            <Modal
+            isShowing={isShowing}
+            hide={toggle}
+            />
         </header>
     )
 }
