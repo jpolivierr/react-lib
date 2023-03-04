@@ -10,26 +10,52 @@
 .modal-window{
     background: white;
     position: absolute;
-    right: 0;
     width: max-content;
+    height: 100vh;   
+}
+.slide-window{
+    position: absolute;
+    background: white;
     height: 100vh;
     top: 0;
     padding: 3rem 1.5rem;
 }
 
+.slide-window .close-btn{
+    top: 1px;
+    left: 5px;
+}
+.float-window{
+    position: absolute;
+    background: white;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 3rem 1.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+    padding: 3rem 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.float-window .close-btn{
+
+    top: 10px;
+    right: 5px;
+
+}
 .close-btn{
     display: block;
     position: absolute;
     font-size: 2rem;
     font-weight: 100;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    top: 10px;
-    left: 5px;
 }
 
 .close-btn span{

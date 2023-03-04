@@ -4,9 +4,9 @@ import getMotion from "../Util/getMotion"
 const FoatingWindow = (props) =>{
 
     const {
+           Class,
            children,
            toggle,
-           context,
            motionType,
            animated,
            seconds,
@@ -35,7 +35,7 @@ const FoatingWindow = (props) =>{
     return(
         <>
         
-        <div className={`modal-window ${getMotion(motionType, motion)}`}>
+        <div className={`${Class} ${getMotion(motionType, motion)}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={handleClick}><span>+</span>
             </div>
                 {children}

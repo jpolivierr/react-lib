@@ -8,7 +8,7 @@ const useModal = () => {
 
   function toggle(time) {
 
-    if(isShowing && time > 0){
+    if(isShowing && Number(time) > 0){
 
         setMotion(false)
 

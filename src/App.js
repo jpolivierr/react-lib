@@ -165,10 +165,6 @@ function App() {
     <div className="App">
          <TopNav Class="top-nav"/>
          <FilterForm setting = {formSetting} />
-         <Buttons 
-            clickEvent={toggle}
-            el="click"
-         />
          <Modal
             isShowing={isShowing}
              toggle={toggle}

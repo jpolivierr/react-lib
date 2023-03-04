@@ -35,7 +35,7 @@ const SlideWindow = (props) =>{
     return(
         <>
         
-        <div className={`modal-window ${getMotion(motionType, motion)}`}>
+        <div className={`slide-window ${getMotion(motionType, motion)}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={handleClick}><span>+</span>
             </div>
                 {children}
