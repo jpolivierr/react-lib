@@ -1,7 +1,7 @@
 import ModalAnimation from "../ModalAnimation/animation"
 import getMotion from "../Util/getMotion"
 
-const ModalSideWindow = (props) =>{
+const FoatingWindow = (props) =>{
 
     const {
            children,
@@ -54,4 +54,4 @@ const ModalSideWindow = (props) =>{
     )
 }
 
-export default ModalSideWindow
+export default FoatingWindow 

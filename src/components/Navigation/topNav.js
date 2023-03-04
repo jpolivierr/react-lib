@@ -1,7 +1,7 @@
 import Buttons from "../Buttons/button"
-import useModal from "../../Hooks/Modal/useModal"
+import  useModal  from "../../Hooks/Modal/useModal"
 import Modal from "../../Hooks/Modal/modal"
-import ModalSideWindow from "../../Hooks/Modal/Windows/modalSideWindow"
+import SlideWindow from "../../Hooks/Modal/Windows/slideWindow"
 import ModalOverlay from "../../Hooks/Modal/Overlays/modalOverlay"
 import { Ulist, List } from "../List/MyLists"
 
@@ -39,15 +39,8 @@ const TopNav = (props) =>{
                 Class="main-btn"
             />
                 </section>
-
-                
-               
+ 
             </header> 
-            
-            
-            
-            
-            
             
             <Modal
                     isShowing={isShowing}
@@ -60,7 +53,7 @@ const TopNav = (props) =>{
                         from="0"
                         to="1"
                     />
-                    <ModalSideWindow 
+                    <SlideWindow  
                             toggle={toggle}
                             animated={{time: 300, motion}}
                             motionType="slide-left"
@@ -91,7 +84,7 @@ const TopNav = (props) =>{
                                 />
                             </Ulist>
 
-                        </ModalSideWindow>
+                        </SlideWindow>
                 </Modal>
         </>
         

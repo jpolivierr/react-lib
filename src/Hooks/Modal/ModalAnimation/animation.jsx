@@ -58,6 +58,33 @@ const ModalAnimation = (props) =>{
                 }
     `
 
+
+    const float = `
+    .float{
+        animation: floatIn ${seconds}  forwards;
+    }
+    
+    @keyframes floatIn {
+        from{
+            top: ${from};
+        }to{
+            top: ${to};
+        }
+    }
+    
+    .close-float{
+        animation: floatOut ${seconds} forwards;
+    }
+    
+    @keyframes floatOut {
+        from{
+            top: ${to};
+        }to{
+            top: ${from};
+        }
+    }
+`
+
     const renderStyle = () =>{
 
         switch(type){
@@ -66,6 +93,9 @@ const ModalAnimation = (props) =>{
 
             case "fade" :
                 return fade
+
+            case "float" :
+            return float
 
             default :
                 return null
