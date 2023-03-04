@@ -4,14 +4,12 @@ import { filterAction } from './_state/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useState } from 'react';
-import { List, Ulist } from './components/List/MyLists';
 import { emptyField } from './lib/Forms/Util/emptyField';
 import { numValidate } from './lib/Forms/Util/numValidate';
 import { formatInput } from './lib/Forms/Util/formatInput';
 import TopNav from './components/Navigation/topNav';
 import useModal from './Hooks/Modal/useModal';
 import Modal from './Hooks/Modal/modal';
-import Buttons from './components/Buttons/button';
 import "./styles/index.js"
 
 // Utility functions
@@ -34,24 +32,6 @@ function App() {
     return name + " I'm new here"
 
   }
-
-
-  function func1(data){
-    console.log("func1: " + data)
-    return false
- }
-
- function func2(data){
-    console.log("func2: " + data)
-    return false
- }
-
- function func3(data){
-    console.log("func3: " + data)
-    return false
- }
-
- const arrFunc = [func1,func2,func3]
 
   const [myList] = useState({
               info: {
@@ -243,10 +223,7 @@ const [myList3] = useState({
 
           <FilterForm setting = {formSetting} />
          </div>
-         <Modal
-            isShowing={isShowing}
-             toggle={toggle}
-            />
+     
     </div>
   );
 }
