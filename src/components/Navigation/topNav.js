@@ -1,11 +1,11 @@
 import Buttons from "../Buttons/button"
-import  useModal  from "../../Hooks/Modal/useModal"
-import  useModal2  from "../../Hooks/Modal/useModal"
-import Modal from "../../Hooks/Modal/modal"
-import Modal2 from "../../Hooks/Modal/modal"
-import SlideWindow from "../../Hooks/Modal/Windows/slideWindow"
-import FoatingWindow from "../../Hooks/Modal/Windows/floatWindow"
-import ModalOverlay from "../../Hooks/Modal/Overlays/modalOverlay"
+import  useModal  from "../../lib/Modal/useModal"
+import  useModal2  from "../../lib/Modal/useModal"
+import Modal from "../../lib/Modal/modal"
+import Modal2 from "../../lib/Modal/modal"
+import SlideWindow from "../../lib/Modal/Windows/slideWindow"
+import FoatingWindow from "../../lib/Modal/Windows/floatWindow"
+import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import { Ulist, List } from "../List/MyLists"
 
 

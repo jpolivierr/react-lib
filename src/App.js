@@ -8,8 +8,8 @@ import { emptyField } from './lib/Forms/Util/emptyField';
 import { numValidate } from './lib/Forms/Util/numValidate';
 import { formatInput } from './lib/Forms/Util/formatInput';
 import TopNav from './components/Navigation/topNav';
-import useModal from './Hooks/Modal/useModal';
-import Modal from './Hooks/Modal/modal';
+import useModal from './lib/Modal/useModal';
+import Modal from './lib/Modal/modal';
 import "./styles/index.js"
 
 // Utility functions
