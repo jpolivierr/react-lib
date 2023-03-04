@@ -47,3 +47,17 @@ fieldset{
     transform: rotate(360deg);
   }
 }
+
+.listStyle h3{
+    margin-bottom: 1rem;
+}
+
+.listStyle li{
+  padding: .5rem 0rem;
+cursor: pointer;
+transition: .2s;
+}
+
+.listStyle li:hover{
+  background: rgba(170, 211, 224, 0.288);
+}

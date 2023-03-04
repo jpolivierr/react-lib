@@ -1,10 +1,11 @@
 import {useEffect, useRef, useState } from "react";
 
-const Options = (props) =>{
+const ListOption = (props) =>{
 
-    const [inputValue, setInputValue] = useState("")
+    const [inputValue, setInputValue] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
+    const [userView, setUserView] = useState("")
     const windowRef = useRef(null);
 
     const {required, 
@@ -44,55 +45,70 @@ const Options = (props) =>{
 
     },[])
 
-    const handleClick = ( name, funcArray) =>{
+    const handleClick = ( value, funcArray) =>{
 
       if(Array.isArray(funcArray) && funcArray.length > 0){
 
            let newValue 
 
+           let inputHolder = [...inputValue]
+           
+           if(!inputHolder.includes(value)){
+
+                 inputHolder.push(value)
+
+           }else{
+            
+             const index = inputHolder.indexOf(value)
+             inputHolder.splice(index, 1)
+
+           }
+
+
             funcArray.forEach((func)=>{
 
-                newValue = func(name)
+                newValue = func(inputHolder)
 
             })
 
-            handleInput(newValue)
+            setUserView(newValue)
+            setInputValue(inputHolder)
+            fieldToUpdate && fieldToUpdate(inputHolder)
+            updateFormField && updateFormField(name,inputHolder)
 
             listToggleWindow()
 
         }else{
 
-            handleInput(name)
+            handleInput(value)
 
             listToggleWindow()
         }
         
     }
 
-    const listToggleWindow = () =>{
+    const handleInput = (value) =>{
 
-        if(list.info.listPreventExit){
+        const holder = [...inputValue]
 
-            return
-
-        }else{
-
-            setOptionState(!optionState)
-
+        if(!holder.includes(value)){
+            holder.push(value)
         }
+
+        setUserView(holder)
+        setInputValue(holder)
+        fieldToUpdate && fieldToUpdate(holder)
+        updateFormField && updateFormField(name,holder)
+
     }
+
+    const listToggleWindow = () =>{
+        return
+}
 
     const toggleWindow = () =>{
 
         setOptionState(!optionState)
-
-    }
-
-    const handleInput = (value) =>{
-
-        setInputValue(value)
-        fieldToUpdate && fieldToUpdate(value)
-        updateFormField && updateFormField(name,value)
 
     }
     
@@ -100,35 +116,34 @@ const Options = (props) =>{
     const handleBlur = () =>{
       
     }
-
-   
     
     const showStyle = optionState ? "show" : "hide"
 
      return(
         <fieldset className="options" ref={windowRef}>
-        {props.label && <label>{props.label}</label>}
-        <div className="input-container" 
+        {/* {props.label && <label>{props.label}</label>} */}
+        {/* <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>
              <input 
                      placeholder={props.placeHolder} 
                      name={props.name}
-                     value={inputValue}
+                     value={userView}
                      onBlur={()=>{handleBlur()}}
                      style={props.icon && {paddingRight: "2.3rem"}}
                      readOnly={true}
                      />
                      {props.icon && props.icon}
-        </div>
+        </div> */}
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-            <div className={`options-window ${showStyle}`  }>
-                   {/* {props.comp} */}
+            <div>
+        
                     <ul className={list.info.Class}>
                         {list.info.title && <h3>{list.info.title}</h3>}
 
                         {
                           list.lists.map((li,index) => (
                             <li
+                            style={{display: "flex"}}
                                  key={index}
                                  className={li.Class}
                                  listid={li.name}
@@ -137,6 +152,10 @@ const Options = (props) =>{
                                 }}
                                >
                                 {
+                                    !inputValue.includes(li.name) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
+                                }
+                                {
+                                    
                                     li.el && li.el
                                 }
                             </li>
@@ -144,9 +163,10 @@ const Options = (props) =>{
                         }
                     </ul>
             </div> 
+            
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )
 }
 
-export default Options;
+export default ListOption;

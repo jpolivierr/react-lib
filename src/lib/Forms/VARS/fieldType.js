@@ -1,6 +1,8 @@
 const fieldTypes = {
     INPUT: "input",
-    OPTIONS: "options"
+    OPTIONS: "options",
+    MULTISELECT: "multi-select",
+    LIST_OPTION: "list-option"
 }
 
 export default fieldTypes 

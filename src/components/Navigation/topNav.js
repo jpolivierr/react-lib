@@ -75,28 +75,6 @@ const TopNav = (props) =>{
                             from="-300px"
                             to="50px"
                         >
-                            <Ulist
-                                Class="listStyle"
-                                title="My List"
-                            >
-                                <List
-                                element="list 1"
-                                handleClick={()=>toggle(300)}
-                                />
-                                <List
-                                element="list 2"
-                                handleClick={()=>toggle(300)}
-                                />
-                                <List
-                                element="list 3"
-                                handleClick={()=>toggle(300)}
-                                target={true}
-                                />
-                                <List
-                                element="list 4"
-                                handleClick={()=>toggle(300)}
-                                />
-                            </Ulist>
 
                         </FoatingWindow>
                 </Modal>

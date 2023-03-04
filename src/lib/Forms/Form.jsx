@@ -1,6 +1,8 @@
 import Inputs from "./Fields/Inputs";
-import Options from "./Options/Options";
+import Options from "./Fields/Options";
 import fieldTypes from "./VARS/fieldType";
+import MultiSelect from "./Fields/MultiSelect";
+import ListOption from "./Fields/ListOption";
 import { myFormFieds } from "./Config/getFields";
 import { validateFields } from "./Config/formValidation";
 
@@ -31,6 +33,7 @@ const Form = (props) =>{
 
       const updateFormField = (key, value) =>{
 
+         
          if((key in formFields)){
 
                const formFieldCopy = {...formFields}
@@ -79,7 +82,6 @@ const Form = (props) =>{
          return formErrorCopy
 
       }
-
       const submit = (e) =>{
 
                        e.preventDefault()
@@ -95,6 +97,8 @@ const Form = (props) =>{
                        }
                                
       }
+
+      console.log(formFields)
 
       const getFields = (field,index) =>{
          
@@ -138,8 +142,52 @@ const Form = (props) =>{
                                     updateFormField = {updateFormField}
                                     updateError = {updateError}
                                     defaultValue = {field.defaultValue}
+                                    listPreventExit = {field.listPreventExit}
                                  />
                            )
+
+                        case fieldTypes.MULTISELECT :
+                           return (
+                              <MultiSelect 
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 formStatus={submitStatus}
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+                                 updateError = {updateError}
+                                 defaultValue = {field.defaultValue}
+                                 listPreventExit = {field.listPreventExit}
+                              />
+                        )
+
+                        case fieldTypes.LIST_OPTION :
+                           return (
+                              <ListOption 
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 formStatus={submitStatus}
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+                                 updateError = {updateError}
+                                 defaultValue = {field.defaultValue}
+                              />
+                        )
 
                         default :
                               return null

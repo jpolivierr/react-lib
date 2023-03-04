@@ -4,9 +4,10 @@ import { filterAction } from './_state/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useState } from 'react';
-import Lists from './components/List/Lists';
-import { emptyField } from './components/Forms/Util/emptyField';
-import { numValidate } from './components/Forms/Util/numValidate';
+import { List, Ulist } from './components/List/MyLists';
+import { emptyField } from './lib/Forms/Util/emptyField';
+import { numValidate } from './lib/Forms/Util/numValidate';
+import { formatInput } from './lib/Forms/Util/formatInput';
 import TopNav from './components/Navigation/topNav';
 import useModal from './Hooks/Modal/useModal';
 import Modal from './Hooks/Modal/modal';
@@ -56,7 +57,6 @@ function App() {
               info: {
                         title: "Property Type",
                         Class: "listStyle",
-                        listPreventExit: true
               },
               lists: [
                       {
@@ -84,19 +84,71 @@ function App() {
     lists: [
             {
               name: "list 1",
-              el: <p>List 1</p>,
-              handleClick: [listFunc],
+              el: <span>List 1</span>,
+              // handleClick: [formatInput],
               href: [],
               Class: "listClass"
             },
             {
               name: "list 2",
-              el: <p>List 2</p>,
-              handleClick: listFunc,
+              el: <span>List 2</span>,
+              // handleClick: [formatInput],
+              href: [],
+              Class: "listClass"
+            },
+            {
+              name: "list 3",
+              el: <span>List 3</span>,
+              // handleClick: [formatInput],
+              href: [],
+              Class: "listClass"
+            },
+            {
+              name: "list 4",
+              el: <span>List 4</span>,
+              // handleClick: [formatInput],
               href: [],
               Class: "listClass"
             },
           ] 
+})
+
+
+const [myList3] = useState({
+  info: {
+            title: "Property Type",
+            Class: "listStyle",
+  },
+  lists: [
+          {
+            name: "list 1",
+            el: <span>List 1</span>,
+             handleClick: [formatInput],
+            href: [],
+            Class: "listClass"
+          },
+          {
+            name: "list 2",
+            el: <span>List 2</span>,
+            handleClick: [formatInput],
+            href: [],
+            Class: "listClass"
+          },
+          {
+            name: "list 3",
+            el: <span>List 3</span>,
+            handleClick: [formatInput],
+            href: [],
+            Class: "listClass"
+          },
+          {
+            name: "list 4",
+            el: <span>List 4</span>,
+            handleClick: [formatInput],
+            href: [],
+            Class: "listClass"
+          },
+        ] 
 })
 
   // Form Settings
@@ -127,6 +179,7 @@ function App() {
                   list : myList,
                   defaultValue : location,
                   onSubmitFunc: [emptyField],
+                  // listPreventExit: true
                 },
                 {
                   type : "options",
@@ -136,6 +189,26 @@ function App() {
                   fieldToUpdate : setLocation,
                   icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
                   list : myList2,
+                  onSubmitFunc: [emptyField],
+                },
+                {
+                  type : "multi-select",
+                  label : "Amenities",
+                  placeHolder : "Amenities",
+                  name : "amenities",
+                  fieldToUpdate : setLocation,
+                  icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                  list : myList3,
+                  onSubmitFunc: [emptyField],
+                },
+                {
+                  type : "list-option",
+                  label : "toys",
+                  placeHolder : "toys",
+                  name : "toys",
+                  fieldToUpdate : setLocation,
+                  icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                  list : myList3,
                   onSubmitFunc: [emptyField],
                 },
                   {
@@ -164,7 +237,12 @@ function App() {
   return (
     <div className="App">
          <TopNav Class="top-nav"/>
-         <FilterForm setting = {formSetting} />
+         
+         <div style={{display: "flex",justifyContent: "space-around"}}>
+
+
+          <FilterForm setting = {formSetting} />
+         </div>
          <Modal
             isShowing={isShowing}
              toggle={toggle}
