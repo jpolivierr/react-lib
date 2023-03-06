@@ -7,6 +7,7 @@ import SlideWindow from "../../lib/Modal/Windows/slideWindow"
 import FoatingWindow from "../../lib/Modal/Windows/floatWindow"
 import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import { Ulist, List } from "../List/MyLists"
+import Layout from "../../lib/Layout/layout"
 
 
 const TopNav = (props) =>{
@@ -20,41 +21,25 @@ const TopNav = (props) =>{
     return(
 
         <>
-            <header className={Class}>
 
-                <section>
-                    {
-                logo && 
-                    <figure>
-                        <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
-                    </figure>
-            }
-                
-            
-            {
-                Array.isArray(lists) && lists.length > 0 && 
-                        <ul>
-                                {lists.map((list,index)=>{
-                                return list.el
-                                })}
-                        </ul>
-            }
+        <Layout Class="container">
 
-            <Buttons
-                clickEvent = {toggle}
-                el="Submit"
-                Class="main-btn"
-            />
+                <Buttons
+                        clickEvent = {toggle}
+                        el="Submit"
+                        Class="main-btn"
+                    />
 
-           <Buttons
-                clickEvent = {modal2.toggle}
-                el="sign up"
-                Class="main-btn"
-            />
-                </section>
- 
-            </header> 
-            
+                <Buttons
+                        clickEvent = {modal2.toggle}
+                        el="sign up"
+                        Class="main-btn"
+                    />
+                    
+        </Layout>
+        
+
+      
             <Modal
                     isShowing={isShowing}
                 >

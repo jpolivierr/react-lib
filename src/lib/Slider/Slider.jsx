@@ -39,19 +39,11 @@ const Slider = (props) =>{
 
         window.addEventListener("resize", ()=>{
 
-            // console.log("Box count", boxCount)
-            // console.log("Total card", totalCard)
-            // console.log("slider width", sliderWidth)
             const slider2 = sliderElement.current
             const slider2Width = slider2.clientWidth
             const cardWidth2 = slider2Width / cardSplit(slider.clientWidth)
             const totalCount = (cardWidth2 * totalCard) - slider2Width
-            // console.log("=============================")
-            // console.log("Total card", totalCard)
-            // console.log("Card width", cardWidth2)
-            // console.log("Slider width", slider2Width)
-            // console.log("total count", totalCount )
-            // console.log("=============================")
+ 
             console.log(slider2.getAttribute("data-count"))
             const count = slider2.getAttribute("data-count")
             setSliderWidth(slider2Width)
@@ -119,17 +111,12 @@ const Slider = (props) =>{
         return cardWidth + "px"
     }
 
-    // console.log("Box count", boxCount)
-    // console.log("Total card", totalCard)
-    // console.log("Total count", totalCount)
-    // console.log("slider width", sliderWidth)
-    // console.log("Card width", cardWidth)
 
     return(
-        <section className="slider-container">
-         <div ref={sliderElement} className="slider" data-count={count}>
+        <section className="slider-container container">
+         <div style={{width : "100%"}} ref={sliderElement} className="slider" data-count={count}>
             {
-               Array.isArray(children) ?
+               children.length > 0 &&
 
                   children.map((element, index) =>(
                     <section 
@@ -138,15 +125,18 @@ const Slider = (props) =>{
                              style={{
                                       right: boxCount,
                                       minWidth: getCardWidth(),
-                                      transition: "right .3s"
+                                      transition: "right .2s"
                                       }} 
                              className="slider-card"
                              >
                         {element}
                     </section>
-                  )) : {children}
+                  ))
                     
             }  
+             {
+                !children.length && children
+            }
         </div>
         <span onClick={moveRight} ref={rightBtn} className="slider-btn slider-btn-right">
              <i className="fa-solid fa-chevron-right arrow-icons"></i>

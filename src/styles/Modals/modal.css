@@ -5,13 +5,15 @@
     height: 100%;
     left: 0;
     top: 0;
+    z-index: 100;
 }
 
 .modal-window{
     background: white;
     position: absolute;
     width: max-content;
-    height: 100vh;   
+    height: 100vh;  
+    z-index: 101; 
 }
 .slide-window{
     position: absolute;
@@ -19,6 +21,7 @@
     height: 100vh;
     top: 0;
     padding: 3rem 1.5rem;
+    z-index: 101; 
 }
 
 .slide-window .close-btn{
@@ -37,6 +40,7 @@
     z-index: 2;
     padding: 3rem 1.5rem;
     padding-bottom: 1rem;
+    z-index: 101;
 }
 
 .float-window .close-btn{
