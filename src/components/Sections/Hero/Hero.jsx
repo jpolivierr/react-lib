@@ -6,18 +6,17 @@ const Hero = () =>{
 
         parent : {
                     column: "1fr 1fr",
-                    // row : "1fr 1fr",
-                    background: "silver",
+                    background: "",
+                    padding: "2rem 0rem 6rem"
                 },
             1 : {
                 alignSelf: "center",
                 justifySelf: "center",
-                textAlign : "center"
+                margin : "2rem 0rem 0rem 0rem"
             },
             2 : {
-              alignSelf: "center",
-              justifySelf: "center",
-              textAlign : "center"
+              alignSelf: "",
+              justifySelf: "flex-end",
           }
 
 }
@@ -25,7 +24,6 @@ const Hero = () =>{
     return(
         <Layout
              elementStyle={layoutStyle}
-             Style={{background: "silver", padding : "5rem 0rem"}}
              Class="container"
           >
                 <div>
@@ -37,8 +35,8 @@ const Hero = () =>{
                 </div> 
 
                 <figure>
-                    Layout 2
-                  </figure>  
+                    <img style={{maxWidth: "600px"}} src="https://www.hometrest.com/static/media/house2.0d83ee330493739c74ac.jpg" />
+                </figure>  
           </Layout> 
     )
 }

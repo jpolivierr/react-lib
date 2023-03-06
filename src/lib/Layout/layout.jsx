@@ -11,7 +11,10 @@ const Layout = (props) =>{
             gridRow : null,
             alignSelf : null,
             justifySelf : null,
-            textAlign : null
+            textAlign : null,
+            padding : null,
+            margin : null,
+            background: null
         }
 
 
@@ -24,6 +27,9 @@ const Layout = (props) =>{
                 style.alignSelf = elementStyle[key].alignSelf
                 style.justifySelf = elementStyle[key].justifySelf
                 style.textAlign = elementStyle[key].textAlign
+                style.padding = elementStyle[key].padding
+                style.margin = elementStyle[key].margin
+                style.background = elementStyle[key].background
 
             }
         }
@@ -32,8 +38,6 @@ const Layout = (props) =>{
     }
 
     const getParentStyle = () =>{
-
-        const layoutKey = ["gridTemplateColumns",""]
 
         const layoutGrid = {
             display: "grid",
@@ -49,21 +53,17 @@ const Layout = (props) =>{
 
                 layoutGrid.gridTemplateColumns = elementStyle[key].column
                 layoutGrid.gridTemplateRows = elementStyle[key].row 
-                layoutGrid.gap= elementStyle[key].gap 
+                layoutGrid.gap= elementStyle[key].gap
+                layoutGrid.textAlign = elementStyle[key].textAlign
+                layoutGrid.padding = elementStyle[key].padding
+                layoutGrid.margin = elementStyle[key].margin
+                layoutGrid.background = elementStyle[key].background
 
             }
         }
 
         return layoutGrid
 
-    }
-
-
-    const layoutGrid = {
-        display: "grid",
-        gridTemplateColumns: column,
-        gridTemplateRows: row,
-        height: "500px"
     }
 
    
@@ -75,7 +75,6 @@ const Layout = (props) =>{
                   children.map((element, index) =>(
                     <div 
                              key={index}  
-                             className={Class}
                              style={getChildStyle(index)}
                              >
                         {element}

@@ -18,11 +18,52 @@ const TopNav = (props) =>{
 
     const modal2 = useModal2();
 
+    const layoutStyle = {
+            parent : {
+                         column: "max-content 1fr max-content max-content"
+                        
+                        },
+                        1 :{
+                            alignSelf: "center",
+                            justifySelf : "center"
+                        },
+
+                        2 :{
+                            alignSelf: "center",
+                            justifySelf : "flex-end",
+                            margin : "0rem 3rem 0rem 0rem"
+                        },
+                        3 :{
+                            alignSelf: "center",
+                            justifySelf : "center",
+                            margin : "0rem 1rem 0rem 0rem"
+                        },
+                        4 :{
+                            alignSelf: "center",
+                            justifySelf : "center"
+                        }
+    }
+
     return(
 
         <>
 
-        <Layout Class="container">
+        <Layout 
+            Class="container"
+             elementStyle={layoutStyle}
+             Style={{padding: "2rem 0rem"}}
+            >
+
+                <figure>
+                    LOGO HERE
+                </figure>
+
+               <ul style={{display: "Flex", gap: "2rem"}}>
+                    <li>Home</li>
+                    <li>about</li>
+                    <li>team</li>
+                    <li>contact</li>
+               </ul>
 
                 <Buttons
                         clickEvent = {toggle}
@@ -35,7 +76,7 @@ const TopNav = (props) =>{
                         el="sign up"
                         Class="main-btn"
                     />
-                    
+
         </Layout>
         
 
