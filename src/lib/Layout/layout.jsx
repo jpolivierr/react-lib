@@ -1,7 +1,8 @@
+import ReactDOM from 'react-dom';
 
 const Layout = (props) =>{
 
-    const {children, column, row, elementStyle, Class, Style} = props
+    const {id, children, column, row, elementStyle, Class, Style} = props
 
 
     const getChildStyle = (index) =>{
@@ -37,38 +38,139 @@ const Layout = (props) =>{
         return style
     }
 
-    const getParentStyle = () =>{
+    const generateClass = () =>{
 
-        const layoutGrid = {
-            display: "grid",
-            gridTemplateColumns: column,
-            gridTemplateRows: row,
-            gap : null
-            
-        }
+        if(id){
+
+        let styleString = ""
+        let parentStyle = ""
 
         for(const key in elementStyle){
-
+   
             if(key === "parent"){
 
-                layoutGrid.gridTemplateColumns = elementStyle[key].column
-                layoutGrid.gridTemplateRows = elementStyle[key].row 
-                layoutGrid.gap= elementStyle[key].gap
-                layoutGrid.textAlign = elementStyle[key].textAlign
-                layoutGrid.padding = elementStyle[key].padding
-                layoutGrid.margin = elementStyle[key].margin
-                layoutGrid.background = elementStyle[key].background
+                parentStyle = `
+                .${id}{
+                    display : grid;
+                ${
+                    !elementStyle[key].background ? 
+                    "" : 
+                    "background: " + elementStyle[key].background +";"
+                }
+                ${
+                    !elementStyle[key].column? 
+                    "" : 
+                    "grid-template-columns: " + elementStyle[key].column +";"
+                }
+                ${
+                    !elementStyle[key].row ? 
+                    "" : 
+                    "grid-template-rows: " + elementStyle[key].row +";"
+                }
+                ${
+                    !elementStyle[key].alignSelf ? 
+                    "" : 
+                    "align-self: " + elementStyle[key].alignSelf +";"
+                }
+                ${
+                    !elementStyle[key].justifySelf ? 
+                    "" : 
+                    "justify-self: " + elementStyle[key].justifySelf +";"
+                }
+                ${
+                    !elementStyle[key].textAlign ? 
+                    "" : 
+                    "text-align: " + elementStyle[key].textAlign +";"
+                }
+                ${
+                    !elementStyle[key].margin ? 
+                    "" : 
+                    "margin: " + elementStyle[key].margin +";"
+                }
 
+                ${
+                    !elementStyle[key].padding ? 
+                    "" : 
+                    "padding: " + elementStyle[key].padding +";"
+                }
+                
+                }
+                `
+
+            }if(typeof Number(key) === "number" && Number(key) > 0){
+
+                styleString += `
+                .${id} div:nthChild(${key}){
+                ${
+                    !elementStyle[key].background ? 
+                    "" : 
+                    "background: " + elementStyle[key].background +";"
+                }
+                ${
+                    !elementStyle[key].column? 
+                    "" : 
+                    "grid-template-columns: " + elementStyle[key].column +";"
+                }
+                ${
+                    !elementStyle[key].row ? 
+                    "" : 
+                    "grid-template-rows: " + elementStyle[key].row +";"
+                }
+                ${
+                    !elementStyle[key].alignSelf ? 
+                    "" : 
+                    "align-self: " + elementStyle[key].alignSelf +";"
+                }
+                ${
+                    !elementStyle[key].justifySelf ? 
+                    "" : 
+                    "justify-self: " + elementStyle[key].justifySelf +";"
+                }
+                ${
+                    !elementStyle[key].textAlign ? 
+                    "" : 
+                    "text-align: " + elementStyle[key].textAlign +";"
+                }
+                ${
+                    !elementStyle[key].margin ? 
+                    "" : 
+                    "margin: " + elementStyle[key].margin +";"
+                }
+
+                ${
+                    !elementStyle[key].padding ? 
+                    "" : 
+                    "padding: " + elementStyle[key].padding +";"
+                }
+                
+                }
+                `
             }
         }
 
-        return layoutGrid
+        const style = `
+
+            ${parentStyle}
+             ${styleString}
+
+        `
+
+        return ReactDOM.createPortal(
+            <style>
+                {style}
+            </style>, document.body
+        )
+        }
+       
 
     }
 
+
    
     return(
-        <section className={Class} style={{...getParentStyle(), ...Style}}>
+        <>
+         {generateClass()}
+        <section className={`${id} ${Class}`}>
              {
                children.length > 0 &&
 
@@ -87,6 +189,8 @@ const Layout = (props) =>{
                 !children.length && children
             }
         </section>
+        </>
+        
     )
 }
 

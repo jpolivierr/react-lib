@@ -20,8 +20,8 @@ const TopNav = (props) =>{
 
     const layoutStyle = {
             parent : {
-                         column: "max-content 1fr max-content max-content"
-                        
+                         column: "max-content 1fr max-content max-content",
+                         padding: "2rem 0rem"                  
                         },
                         1 :{
                             alignSelf: "center",
@@ -49,6 +49,7 @@ const TopNav = (props) =>{
         <>
 
         <Layout 
+            id="MyNav"
             Class="container"
              elementStyle={layoutStyle}
              Style={{padding: "2rem 0rem"}}
