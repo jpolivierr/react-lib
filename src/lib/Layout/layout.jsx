@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 const Layout = (props) =>{
@@ -5,38 +6,20 @@ const Layout = (props) =>{
     const {id, children, column, row, elementStyle, Class, Style} = props
 
 
-    const getChildStyle = (index) =>{
-
-        const style = {
-            gridColumn: null,
-            gridRow : null,
-            alignSelf : null,
-            justifySelf : null,
-            textAlign : null,
-            padding : null,
-            margin : null,
-            background: null
+    useLayoutEffect(()=>{
+         
+        if(!document.querySelector("#compStyle")){
+            const el = document.createElement("style")
+            el.id = "compStyle"
+            document.head.appendChild(el)
+        }else{
+            console.log("already Exist")
         }
 
+        generateClass()
 
-        for(const key in elementStyle){
+    },[])
 
-            if(Number(key) === index + 1){
-
-                style.gridColumn = elementStyle[key].column
-                style.gridRow = elementStyle[key].row
-                style.alignSelf = elementStyle[key].alignSelf
-                style.justifySelf = elementStyle[key].justifySelf
-                style.textAlign = elementStyle[key].textAlign
-                style.padding = elementStyle[key].padding
-                style.margin = elementStyle[key].margin
-                style.background = elementStyle[key].background
-
-            }
-        }
-
-        return style
-    }
 
     const generateClass = () =>{
 
@@ -100,7 +83,7 @@ const Layout = (props) =>{
             }if(typeof Number(key) === "number" && Number(key) > 0){
 
                 styleString += `
-                .${id} div:nthChild(${key}){
+                .${id} div:nth-child(${key}){
                 ${
                     !elementStyle[key].background ? 
                     "" : 
@@ -154,12 +137,24 @@ const Layout = (props) =>{
              ${styleString}
 
         `
+        
 
-        return ReactDOM.createPortal(
-            <style>
-                {style}
-            </style>, document.body
-        )
+        if(document.querySelector("#compStyle")){
+
+
+            console.log(style)
+             const mainElement = document.querySelector("#compStyle")
+             mainElement.innerHTML += style
+            //  const style = document.createElement("style")
+            // style.innerHTML = style
+            // mainElement.innerText = style
+        }
+
+        // return ReactDOM.createPortal(
+        //     <style>
+        //         {style}
+        //     </style>, document.body
+        // )
         }
        
 
@@ -169,7 +164,6 @@ const Layout = (props) =>{
    
     return(
         <>
-         {generateClass()}
         <section className={`${id} ${Class}`}>
              {
                children.length > 0 &&
@@ -177,7 +171,6 @@ const Layout = (props) =>{
                   children.map((element, index) =>(
                     <div 
                              key={index}  
-                             style={getChildStyle(index)}
                              >
                         {element}
                     </div>

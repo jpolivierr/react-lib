@@ -14,13 +14,12 @@ const Hero = () =>{
                     alignSelf: "center",
                     justifySelf: "center",
                     margin : "2rem 0rem 0rem 0rem",
-                    background : "Yellow"
                     
                 },
                 2 : {
                 alignSelf: "",
                 justifySelf: "flex-end",
-                background : "red"
+            
           }
 
 }
