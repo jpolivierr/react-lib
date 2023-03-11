@@ -1,6 +1,11 @@
 import { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
-
+import nestedObject from '../../Util/nestedObject';
+import { convertKey } from './Utile/convertKey';
+import { generateParentCss } from './Utile/generateParentCss';
+import { generateCssProps } from './Utile/generateParentCss';
+import { generateChildCss } from './Utile/generateParentCss';
+import { generateMobileStyle } from './Utile/generateParentCss';
 const Layout = (props) =>{
 
     const {id, children, column, row, elementStyle, Class, Style} = props
@@ -9,152 +14,86 @@ const Layout = (props) =>{
     useLayoutEffect(()=>{
          
         if(!document.querySelector("#compStyle")){
+            const head = document.head
+            const firstStyleElement = head.querySelectorAll("style")
             const el = document.createElement("style")
-            el.id = "compStyle"
-            document.head.appendChild(el)
-        }else{
-            console.log("already Exist")
+                el.id = "compStyle"
+
+        
+            if(!firstStyleElement){
+
+                head.appendChild(el)
+
+            }else if(firstStyleElement[0]){
+
+                const first = firstStyleElement[0]
+                head.insertBefore(el, first)
+
+            }
+            
+            
         }
 
         generateClass()
-
+ 
     },[])
+
+
+    const newObj = {
+                   obj1 : {
+                    obj2 : {
+                        obj3 : [1,2,3,4]
+                    }
+                   }
+    }
 
 
     const generateClass = () =>{
 
         if(id){
 
-        let styleString = ""
+        let childStyle = ""
         let parentStyle = ""
+        let mobileStyle
+
+
 
         for(const key in elementStyle){
    
-            if(key === "parent"){
-
-                parentStyle = `
-                .${id}{
-                    display : grid;
-                ${
-                    !elementStyle[key].background ? 
-                    "" : 
-                    "background: " + elementStyle[key].background +";"
-                }
-                ${
-                    !elementStyle[key].column? 
-                    "" : 
-                    "grid-template-columns: " + elementStyle[key].column +";"
-                }
-                ${
-                    !elementStyle[key].row ? 
-                    "" : 
-                    "grid-template-rows: " + elementStyle[key].row +";"
-                }
-                ${
-                    !elementStyle[key].alignSelf ? 
-                    "" : 
-                    "align-self: " + elementStyle[key].alignSelf +";"
-                }
-                ${
-                    !elementStyle[key].justifySelf ? 
-                    "" : 
-                    "justify-self: " + elementStyle[key].justifySelf +";"
-                }
-                ${
-                    !elementStyle[key].textAlign ? 
-                    "" : 
-                    "text-align: " + elementStyle[key].textAlign +";"
-                }
-                ${
-                    !elementStyle[key].margin ? 
-                    "" : 
-                    "margin: " + elementStyle[key].margin +";"
-                }
-
-                ${
-                    !elementStyle[key].padding ? 
-                    "" : 
-                    "padding: " + elementStyle[key].padding +";"
-                }
+        
                 
-                }
-                `
+                 const props  = generateCssProps(key,elementStyle[key])
 
-            }if(typeof Number(key) === "number" && Number(key) > 0){
+                 parentStyle = generateParentCss(key,id, props)
 
-                styleString += `
-                .${id} div:nth-child(${key}){
-                ${
-                    !elementStyle[key].background ? 
-                    "" : 
-                    "background: " + elementStyle[key].background +";"
-                }
-                ${
-                    !elementStyle[key].column? 
-                    "" : 
-                    "grid-template-columns: " + elementStyle[key].column +";"
-                }
-                ${
-                    !elementStyle[key].row ? 
-                    "" : 
-                    "grid-template-rows: " + elementStyle[key].row +";"
-                }
-                ${
-                    !elementStyle[key].alignSelf ? 
-                    "" : 
-                    "align-self: " + elementStyle[key].alignSelf +";"
-                }
-                ${
-                    !elementStyle[key].justifySelf ? 
-                    "" : 
-                    "justify-self: " + elementStyle[key].justifySelf +";"
-                }
-                ${
-                    !elementStyle[key].textAlign ? 
-                    "" : 
-                    "text-align: " + elementStyle[key].textAlign +";"
-                }
-                ${
-                    !elementStyle[key].margin ? 
-                    "" : 
-                    "margin: " + elementStyle[key].margin +";"
-                }
+                 childStyle += generateChildCss(key,id, props)
 
-                ${
-                    !elementStyle[key].padding ? 
-                    "" : 
-                    "padding: " + elementStyle[key].padding +";"
-                }
-                
-                }
-                `
-            }
+                 let mobile = nestedObject(elementStyle[key], "mobile")
+
+                 mobileStyle = generateMobileStyle(id, mobile)
+
+                 console.log(mobileStyle)
+                 
         }
+
 
         const style = `
 
             ${parentStyle}
-             ${styleString}
+             ${childStyle}
+             ${mobileStyle}
+            
 
         `
         
 
         if(document.querySelector("#compStyle")){
 
-
-            console.log(style)
              const mainElement = document.querySelector("#compStyle")
              mainElement.innerHTML += style
-            //  const style = document.createElement("style")
-            // style.innerHTML = style
-            // mainElement.innerText = style
-        }
+   
+          }
 
-        // return ReactDOM.createPortal(
-        //     <style>
-        //         {style}
-        //     </style>, document.body
-        // )
         }
        
 

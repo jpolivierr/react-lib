@@ -1,33 +1,16 @@
+import { useState } from "react"
 import Layout from "../../../lib/Layout/layout"
+import { layoutStyle } from "./heroStyle"
 
 const Hero = () =>{
+    
 
-    const layoutStyle = {
-
-        parent : {
-                    column: "1fr 1fr",
-                    row : "1fr",
-                    background: "",
-                    padding: "2rem 0rem 6rem"
-                },
-                1 : {
-                    alignSelf: "center",
-                    justifySelf: "center",
-                    margin : "2rem 0rem 0rem 0rem",
-                    
-                },
-                2 : {
-                alignSelf: "",
-                justifySelf: "flex-end",
-            
-          }
-
-}
+    const [style, setStyle] = useState(layoutStyle)
 
     return(
         <Layout
              id="MyHero"
-             elementStyle={layoutStyle}
+             elementStyle={style}
              Class="container gridMobile"
           >
                 <div>

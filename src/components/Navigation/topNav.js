@@ -8,6 +8,7 @@ import FoatingWindow from "../../lib/Modal/Windows/floatWindow"
 import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import { Ulist, List } from "../List/MyLists"
 import Layout from "../../lib/Layout/layout"
+import { useState } from "react"
 
 
 const TopNav = (props) =>{
@@ -18,31 +19,28 @@ const TopNav = (props) =>{
 
     const modal2 = useModal2();
 
-    const layoutStyle = {
-            parent : {
-                         column: "max-content 1fr max-content max-content",
-                         padding: "2rem 0rem"                  
+    const [layoutStyle] = useState({
+        parent : {
+                         display : "flex",
+                         padding: "2rem 0rem",
+                         alignItems: "center"     
                         },
-                        1 :{
-                            alignSelf: "center",
-                            justifySelf : "center"
+                        2 : {
+                            flex: 2,
+                            display: "flex",
+                            justifyContent: "center",
+                            textAlign: "center"
                         },
-
-                        2 :{
-                            alignSelf: "center",
-                            justifySelf : "flex-end",
-                            margin : "0rem 3rem 0rem 0rem"
+                        3 : {
+                            textAlign: "right",
+                            marginRight: "1rem"
                         },
-                        3 :{
-                            alignSelf: "center",
-                            justifySelf : "center",
-                            margin : "0rem 1rem 0rem 0rem"
-                        },
-                        4 :{
-                            alignSelf: "center",
-                            justifySelf : "center"
+                        4 : {
+            
+                            textAlign: "right"
+                        
                         }
-    }
+    })
 
     return(
 
@@ -69,13 +67,13 @@ const TopNav = (props) =>{
                 <Buttons
                         clickEvent = {toggle}
                         el="Submit"
-                        Class="main-btn"
+                        Class="main-btn hideMobile"
                     />
 
                 <Buttons
                         clickEvent = {modal2.toggle}
                         el="sign up"
-                        Class="main-btn"
+                        Class="main-btn hideMobile"
                     />
 
         </Layout>
