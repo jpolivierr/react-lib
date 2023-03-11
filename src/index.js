@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import "./fonts/Inter Font Family/style.css"
+// import "./fonts/TT-Norms-Pro/style.css"
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

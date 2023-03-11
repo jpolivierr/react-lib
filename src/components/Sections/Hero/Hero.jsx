@@ -45,7 +45,7 @@ const Hero = () =>{
              Class="container gridMobile"
           >
                 <div>
-                   <h1>Find your dream home</h1>
+                   <h1 style={{fontWeight: ""}}>Find your dream home</h1>
                    <p>
                    Our comprehensive platform allows you to search for properties 
                    in your desired location, using filters such as price, 
