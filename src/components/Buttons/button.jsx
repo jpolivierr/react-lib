@@ -1,10 +1,10 @@
 
 const Buttons = (props) =>{
 
-const {href,Class,el,clickEvent,type} = props
+const {target, href,Class,el,clickEvent,type} = props
 
     return(
-           <a>
+           <a href={href && href} target={target && "_blank"}>
                 <button 
                   style={{cursor: "pointer"}} type={type} onClick={(e)=>{clickEvent(e)}} className={Class}>
                     {el}

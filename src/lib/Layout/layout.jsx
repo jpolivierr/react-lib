@@ -39,14 +39,6 @@ const Layout = (props) =>{
     },[])
 
 
-    const newObj = {
-                   obj1 : {
-                    obj2 : {
-                        obj3 : [1,2,3,4]
-                    }
-                   }
-    }
-
 
     const generateClass = () =>{
 
@@ -62,7 +54,7 @@ const Layout = (props) =>{
    
         
                 
-                 const props  = generateCssProps(key,elementStyle[key])
+                 const props  = generateCssProps(elementStyle[key])
 
                  parentStyle = generateParentCss(key,id, props)
 
@@ -72,7 +64,6 @@ const Layout = (props) =>{
 
                  mobileStyle = generateMobileStyle(id, mobile)
 
-                 console.log(mobileStyle)
                  
         }
 

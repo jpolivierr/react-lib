@@ -82,7 +82,7 @@ const mobileProps = (id, elementStyle) =>{
 }
 
 
-export const generateCssProps = (key, elementStyle) =>{
+export const generateCssProps = (elementStyle) =>{
 
     let props = ""
                 
