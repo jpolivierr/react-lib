@@ -25,19 +25,27 @@ const TopNav = (props) =>{
                          padding: "2rem 0rem",
                          alignItems: "center"     
                         },
+
                         2 : {
                             flex: 2,
                             display: "flex",
                             justifyContent: "center",
-                            textAlign: "center"
+                            textAlign: "center",
+                            mobile : [
+                                {
+                                    screenWidth: "max_1300",
+                                    background: "red"
+                                }
+                            ]
                         },
                         3 : {
                             textAlign: "right",
-                            marginRight: "1rem"
+                            marginRight: "1rem",
+                            
                         },
                         4 : {
             
-                            textAlign: "right"
+                            textAlign: "right",
                         
                         }
     })
@@ -67,13 +75,13 @@ const TopNav = (props) =>{
                 <Buttons
                         clickEvent = {toggle}
                         el="Submit"
-                        Class="main-btn hideMobile"
+                        Class="main-btn"
                     />
 
                 <Buttons
                         clickEvent = {modal2.toggle}
                         el="sign up"
-                        Class="main-btn hideMobile"
+                        Class="main-btn"
                     />
 
         </Layout>

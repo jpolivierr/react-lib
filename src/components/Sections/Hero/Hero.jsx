@@ -5,6 +5,8 @@ import Buttons from "../../Buttons/button"
 
 const Hero = () =>{
 
+    const max_1300 = "max_1300"
+
     const layoutStyle = {
 
         parent : {
@@ -12,24 +14,30 @@ const Hero = () =>{
                     gridTemplateColumns: "1fr 1fr",
                     gridTemplateRows : "1fr",
                     padding: "2rem 0rem 6rem",
-                    mobile : {
-                               max_1300 :
+                    mobile : [
                                {
+                                   screenWidth: "max_1300",
                                    gridTemplateColumns: "1fr",
                                    alignItems: "center",
                                    justifyItems: "flex-start",    
                                    rowGap : "3rem"
                                }
-                            }                
+                            ]                
                             
                 },
                 1 : {
                     alignSelf: "center",
                     justifySelf: "center",
+                    mobile : [
+                                  {
+                                    screenWidth: "max_1300",
+                                    background : "yellow"
+                                  }
+                    ]
                 },
                 2 : {
                 alignSelf: "",
-                background : "purple"
+                background : "purple",
             
           }
     

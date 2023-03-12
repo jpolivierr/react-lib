@@ -33,24 +33,39 @@ export const generateChildCss = (key, id, props) =>{
 
 }
 
-export const generateMobileStyle = (id, mobile) =>{
+export const generateMobileStyle = (id, mobile, elKey) =>{
+ 
+       if(Array.isArray(mobile) && mobile.length > 0 && elKey === "parent"){
 
-    
-    
-       if(mobile){
         let mobileStyle = ""
+        let styleProps = ""
 
-            for(let key in mobile){
-                const split = key.split("_")
-                const minMax = split[0]
-                const pixels = split[1]
-             mobileStyle += `@media(${minMax}-width: ${pixels}px){
-                                ${mobileProps(id, mobile[key])}
-                            }
-                            `
-            }
+            mobile.forEach((propsObj)=> {
+      
+                if(propsObj.screenWidth){
+
+                    const split = propsObj.screenWidth.split("_")
+                    const minMax = split[0]
+                    const pixels = split[1]
+
+                    mobileStyle += `@media(${minMax}-width: ${pixels}px){`
+
+                    for(let key in propsObj){
+
+                    if(key !== "screenWidth"){
+   
+                        styleProps = `${mobileProps(id, propsObj)}`
+                     }
+
+                }
+
+                }
+                
+                
+            })
+
         
-            return mobileStyle
+            return mobileStyle + styleProps + "}"
        }else{
 
               return ""
@@ -58,8 +73,8 @@ export const generateMobileStyle = (id, mobile) =>{
        }
         
    
-
 }
+
 
 const mobileProps = (id, elementStyle) =>{
 
@@ -78,6 +93,72 @@ const mobileProps = (id, elementStyle) =>{
     `  
     }            
     
+
+}
+
+
+
+export const generateMobileChildStyle = (id, mobile, elKey) =>{
+
+    if(Array.isArray(mobile) && mobile.length > 0 &&
+    typeof Number(elKey) === "number" && Number(elKey) > 0){
+
+        let mobileStyle = ""
+        let styleProps = ""
+
+            mobile.forEach((propsObj)=> {
+      
+                if(propsObj.screenWidth){
+
+                    const split = propsObj.screenWidth.split("_")
+                    const minMax = split[0]
+                    const pixels = split[1]
+
+                    mobileStyle += `@media(${minMax}-width: ${pixels}px){`
+
+                    for(let key in propsObj){
+
+                    if(key !== "screenWidth"){
+   
+                        styleProps = `${mobileChildProps(id, propsObj, elKey)}`
+                     }
+
+                }
+
+                }
+                
+                
+            })
+        
+            return mobileStyle + styleProps + "}"
+       }else{
+
+              return ""
+
+       }
+        
+
+}
+
+const mobileChildProps = (id, elementStyle, elKey) =>{
+
+    if(elementStyle){
+
+        let props = ""
+        for(let parentKey in elementStyle){
+        
+            props += !elementStyle[parentKey] ? "" :  `${convertKey(parentKey)} : ${elementStyle[parentKey]}; `
+        
+    }
+
+    return  `
+    .${id} div:nth-child(${elKey}){
+       ${props}
+    }
+    `
+    } else{
+        return ""
+    }
 
 }
 

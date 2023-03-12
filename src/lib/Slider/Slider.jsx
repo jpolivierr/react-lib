@@ -40,17 +40,20 @@ const Slider = (props) =>{
         window.addEventListener("resize", ()=>{
 
             const slider2 = sliderElement.current
-            const slider2Width = slider2.clientWidth
+            if(slider2){
+                const slider2Width = slider2.clientWidth
             const cardWidth2 = slider2Width / cardSplit(slider.clientWidth)
             const totalCount = (cardWidth2 * totalCard) - slider2Width
  
-            console.log(slider2.getAttribute("data-count"))
+        
             const count = slider2.getAttribute("data-count")
             setSliderWidth(slider2Width)
             setCardWidth(cardWidth2)
             setTotalCount(totalCount)
             cardSplit(slider2Width)
             setBoxcount(cardWidth2 * count)
+            }
+            
 
         })
 
@@ -75,7 +78,6 @@ const Slider = (props) =>{
     const moveRight = () =>{
     
          if(totalCount == boxCount || totalCount < boxCount){
-            console.log("running")
          }else{
             setBoxcount( boxCount + cardWidth )
             setCount(count + 1)

@@ -6,6 +6,7 @@ import { generateParentCss } from './Utile/generateParentCss';
 import { generateCssProps } from './Utile/generateParentCss';
 import { generateChildCss } from './Utile/generateParentCss';
 import { generateMobileStyle } from './Utile/generateParentCss';
+import { generateMobileChildStyle } from './Utile/generateParentCss';
 const Layout = (props) =>{
 
     const {id, children, column, row, elementStyle, Class, Style} = props
@@ -47,6 +48,7 @@ const Layout = (props) =>{
         let childStyle = ""
         let parentStyle = ""
         let mobileStyle
+        let mobileChildStyle
 
 
 
@@ -62,7 +64,14 @@ const Layout = (props) =>{
 
                  let mobile = nestedObject(elementStyle[key], "mobile")
 
-                 mobileStyle = generateMobileStyle(id, mobile)
+                 mobileStyle = generateMobileStyle(id, mobile, key)
+
+                 mobileChildStyle += generateMobileChildStyle(id, mobile, key)
+
+                 
+
+               
+
 
                  
         }
@@ -73,14 +82,16 @@ const Layout = (props) =>{
             ${parentStyle}
              ${childStyle}
              ${mobileStyle}
+             ${mobileChildStyle.replace("undefined","")}
             
 
         `
-        
+    
 
         if(document.querySelector("#compStyle")){
 
              const mainElement = document.querySelector("#compStyle")
+
              mainElement.innerHTML += style
    
           }

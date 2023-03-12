@@ -7,7 +7,7 @@ const nestedObject = (obj, ...args) =>{
     while(count < args.length ){ 
 
         if(!objValue[args[count]]){
-            return null
+            return false
         }
         
         if(count === args.length - 1){
@@ -15,7 +15,7 @@ const nestedObject = (obj, ...args) =>{
         }
 
         if(!objValue[args[count]]){
-            return null
+            return false
         }
         
         objValue = objValue[args[count]]
