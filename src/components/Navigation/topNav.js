@@ -9,6 +9,7 @@ import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import { Ulist, List } from "../List/MyLists"
 import Layout from "../../lib/Layout/layout"
 import { useState } from "react"
+import { iPad, mobile } from "../../lib/Layout/screenSize"
 
 
 const TopNav = (props) =>{
@@ -21,9 +22,11 @@ const TopNav = (props) =>{
 
     const [layoutStyle] = useState({
         parent : {
-                         display : "flex",
+                         display : "grid",
                          padding: "2rem 0rem",
-                         alignItems: "center"     
+                         gridTemplateColumns: "max-content 1fr max-content max-content",
+                         alignItems: "center",
+                         justifyContent: "space-between"   
                         },
 
                         2 : {
@@ -33,18 +36,16 @@ const TopNav = (props) =>{
                             textAlign: "center",
                             mobile : [
                                 {
-                                    screenWidth: "max_1300",
-                                    background: "red"
+                                    screenWidth: iPad,
+                                    display: "none"
                                 }
                             ]
                         },
                         3 : {
                             textAlign: "right",
-                            marginRight: "1rem",
-                            
+                            marginRight: ".7rem",
                         },
                         4 : {
-            
                             textAlign: "right",
                         
                         }
