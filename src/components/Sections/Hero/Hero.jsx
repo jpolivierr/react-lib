@@ -29,8 +29,6 @@ const Hero = () =>{
                    <Buttons 
                      Class ="main-btn"
                      el="FIND MY HOME"
-                     href="/home"
-                     target={true}
                    />
                    
                 </div> 
