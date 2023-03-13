@@ -126,8 +126,7 @@ export const generateMobileChildStyle = (id, mobile, elKey) =>{
                 }
 
                 }
-                
-                
+                         
             })
         
             return mobileStyle + styleProps + "}"

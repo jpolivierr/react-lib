@@ -53,9 +53,7 @@ const Layout = (props) =>{
 
 
         for(const key in elementStyle){
-   
-        
-                
+            
                  const props  = generateCssProps(elementStyle[key])
 
                  parentStyle = generateParentCss(key,id, props)
@@ -67,13 +65,7 @@ const Layout = (props) =>{
                  mobileStyle = generateMobileStyle(id, mobile, key)
 
                  mobileChildStyle += generateMobileChildStyle(id, mobile, key)
-
-                 
-
-               
-
-
-                 
+      
         }
 
 

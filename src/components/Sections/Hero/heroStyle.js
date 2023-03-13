@@ -1,6 +1,7 @@
 export const layoutStyle = {
 
         parent : {
+                    position: "relative",
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
                     gridTemplateRows : "1fr",
