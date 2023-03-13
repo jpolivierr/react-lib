@@ -1,4 +1,3 @@
-
 .buttonClick{
     animation: buttonClick .05s ease;
 }
@@ -14,4 +13,3 @@
         transform: scale(.9);
     }
 }
-

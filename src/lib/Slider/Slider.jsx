@@ -1,5 +1,6 @@
 import { useLayoutEffect, useEffect, useRef, useState } from "react"
 import "./style/index.css"
+import useScale from "../ClickEvents/scale/Scale"
 
 const Slider = (props) =>{
 
@@ -16,13 +17,19 @@ const Slider = (props) =>{
     const [leftButton, setLeftButton] = useState(true)
     const [sliderGap, setSliderGap] = useState(gap ? gap * 1.25 : 0)
 
-    const [animation, setAnimation] = useState("")
-
     const sliderElement = useRef(null)
     const cardElement = useRef(null)
     const leftBtn = useRef(null)
     const rightBtn = useRef(null)
     
+    const scaleAnimationRight = useScale()
+    const rightButtonAnimation = scaleAnimationRight.animation
+    const rightButtonFunc = scaleAnimationRight.scaleAnimation
+
+    const scaleAnimationLeft = useScale()
+    const leftButtonAnimation = scaleAnimationLeft.animation
+    const leftButtonFunc = scaleAnimationLeft.scaleAnimation
+
 
     useLayoutEffect(()=>{
 
@@ -136,14 +143,6 @@ const Slider = (props) =>{
 
     }
 
-    const buttonClick = () =>{
-
-            setAnimation("buttonClick")
-            setTimeout(()=>{
-                setAnimation("")
-            }, 150)
-        
-    }
 
     return(
         <section className={`slider-container ${Class}`}>
@@ -173,13 +172,13 @@ const Slider = (props) =>{
                 !children.length && children
             }
         </div>
-        <span style={{display: !rightButton && "none" }} onClick={()=>{moveRight(); buttonClick()}} ref={rightBtn} className={`slider-btn slider-btn-right ${animation} `}>
+        <span style={{display: !rightButton && "none" }} onClick={()=>{moveRight(); rightButtonFunc()}} ref={rightBtn} className={`slider-btn slider-btn-right ${rightButtonAnimation} `}>
              <i className="fa-solid fa-chevron-right arrow-icons"></i>
              </span>
 
              <span 
                style={{display: !leftButton && "none" }} 
-             onClick={()=>{moveLeft(); buttonClick()}} ref={leftBtn} className={`slider-btn slider-btn-left ${animation}`}>
+             onClick={()=>{moveLeft(); leftButtonFunc()}} ref={leftBtn} className={`slider-btn slider-btn-left ${leftButtonAnimation}`}>
              <i className="fa-solid fa-chevron-left arrow-icons"></i>
             </span>
         </section>
