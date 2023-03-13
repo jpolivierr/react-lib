@@ -16,6 +16,8 @@ const Slider = (props) =>{
     const [leftButton, setLeftButton] = useState(true)
     const [sliderGap, setSliderGap] = useState(gap ? gap * 1.25 : 0)
 
+    const [animation, setAnimation] = useState("")
+
     const sliderElement = useRef(null)
     const cardElement = useRef(null)
     const leftBtn = useRef(null)
@@ -134,6 +136,15 @@ const Slider = (props) =>{
 
     }
 
+    const buttonClick = () =>{
+
+            setAnimation("buttonClick")
+            setTimeout(()=>{
+                setAnimation("")
+            }, 150)
+        
+    }
+
     return(
         <section className={`slider-container ${Class}`}>
          <div style={{width : "100%", border:"2px solid green"}} ref={sliderElement} className="slider" data-count={count}>
@@ -162,13 +173,13 @@ const Slider = (props) =>{
                 !children.length && children
             }
         </div>
-        <span style={{display: !rightButton && "none" }} onClick={moveRight} ref={rightBtn} className="slider-btn slider-btn-right">
+        <span style={{display: !rightButton && "none" }} onClick={()=>{moveRight(); buttonClick()}} ref={rightBtn} className={`slider-btn slider-btn-right ${animation} `}>
              <i className="fa-solid fa-chevron-right arrow-icons"></i>
              </span>
 
              <span 
                style={{display: !leftButton && "none" }} 
-             onClick={moveLeft} ref={leftBtn} className="slider-btn slider-btn-left">
+             onClick={()=>{moveLeft(); buttonClick()}} ref={leftBtn} className={`slider-btn slider-btn-left ${animation}`}>
              <i className="fa-solid fa-chevron-left arrow-icons"></i>
             </span>
         </section>

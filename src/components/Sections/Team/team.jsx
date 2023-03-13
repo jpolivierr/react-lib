@@ -6,7 +6,7 @@ const Team = () =>{
 
             <Slider 
                Class="container"
-               gap={15}
+               gap={8}
              
             >
                  <div style={{background: "red", height: "300px"}}>
