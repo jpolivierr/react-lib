@@ -74,13 +74,13 @@ const TopNav = (props) =>{
                </ul>
 
                 <Buttons
-                        clickEvent = {toggle}
+                        // clickEvent = {toggle}
                         el="Submit"
                         Class="main-btn"
                     />
 
                 <Buttons
-                        clickEvent = {modal2.toggle}
+                        // clickEvent = {modal2.toggle}
                         el="sign up"
                         Class="main-btn"
                     />

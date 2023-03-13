@@ -1,47 +1,12 @@
 import { useState } from "react"
 import Layout from "../../../lib/Layout/layout"
+import { layoutStyle } from "./heroStyle"
 import Buttons from "../../Buttons/button"
 
 
 const Hero = () =>{
 
     const max_1300 = "max_1300"
-
-    const layoutStyle = {
-
-        parent : {
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gridTemplateRows : "1fr",
-                    padding: "2rem 0rem 6rem",
-                    mobile : [
-                               {
-                                   screenWidth: "max_1300",
-                                   gridTemplateColumns: "1fr",
-                                   alignItems: "center",
-                                   justifyItems: "flex-start",    
-                                   rowGap : "3rem"
-                               }
-                            ]                
-                            
-                },
-                1 : {
-                    alignSelf: "center",
-                    justifySelf: "center",
-                    mobile : [
-                                  {
-                                    screenWidth: "max_1300",
-                                    background : "yellow"
-                                  }
-                    ]
-                },
-                2 : {
-                alignSelf: "",
-                background : "purple",
-            
-          }
-    
-    }
     
 
     const [style, setStyle] = useState(layoutStyle)
