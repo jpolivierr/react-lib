@@ -3,7 +3,7 @@ import "./style/index.css"
 
 const Slider = (props) =>{
 
-    const {children} = props
+    const {children, Class, gap} = props
 
     const[sliderWidth, setSliderWidth] = useState(null)
     const[cardWidth, setCardWidth] = useState(0)
@@ -12,12 +12,14 @@ const Slider = (props) =>{
     const[totalCard, setTotalCard] = useState(0)
     const[split, setSplit] = useState(4)
     const [count, setCount] = useState(0)
+    const [rightButton, setRightButton] = useState(true)
+    const [leftButton, setLeftButton] = useState(true)
+    const [sliderGap, setSliderGap] = useState(gap ? gap * 1.25 : 0)
 
     const sliderElement = useRef(null)
     const cardElement = useRef(null)
     const leftBtn = useRef(null)
     const rightBtn = useRef(null)
-
     
 
     useLayoutEffect(()=>{
@@ -25,7 +27,7 @@ const Slider = (props) =>{
         const slider = sliderElement.current
         const sliderWidth = slider.clientWidth 
         const totalCard = slider.querySelectorAll(".slider-card").length
-        const cardWidth = sliderWidth  / cardSplit(slider.clientWidth)
+        const cardWidth = sliderWidth / cardSplit(slider.clientWidth) - sliderGap
 
         setTotalCard(totalCard)
 
@@ -33,19 +35,16 @@ const Slider = (props) =>{
 
         setSliderWidth(slider.clientWidth)
 
-        setCardWidth(sliderWidth  / cardSplit(slider.clientWidth))
-
-        
+        setCardWidth(sliderWidth / cardSplit(slider.clientWidth) - sliderGap)
 
         window.addEventListener("resize", ()=>{
 
             const slider2 = sliderElement.current
             if(slider2){
                 const slider2Width = slider2.clientWidth
-            const cardWidth2 = slider2Width / cardSplit(slider.clientWidth)
+            const cardWidth2 = slider2Width / cardSplit(slider.clientWidth) - sliderGap
             const totalCount = (cardWidth2 * totalCard) - slider2Width
  
-        
             const count = slider2.getAttribute("data-count")
             setSliderWidth(slider2Width)
             setCardWidth(cardWidth2)
@@ -60,16 +59,42 @@ const Slider = (props) =>{
      
     },[])
 
+    useEffect(()=>{
 
+        buttonState()
+
+    },[boxCount])
+
+   const buttonState = () =>{
+         
+        if(boxCount <= 0){
+           
+            setLeftButton(false)
+
+        }else if(boxCount > 0){
+
+            setLeftButton(true)
+
+        }
+
+        if(boxCount !== 0 && totalCount == boxCount || totalCount < boxCount){
+
+            setRightButton(false)
+
+        }else{
+
+            setRightButton(true)
+
+        }
+
+   }
 
     const moveLeft = () =>{
         
         if(boxCount <= 0){
 
-            
-
         }else{
-            setBoxcount(boxCount - cardWidth)
+            setBoxcount(boxCount - cardWidth - gap)
             setCount(count - 1)
         }
         
@@ -79,7 +104,7 @@ const Slider = (props) =>{
     
          if(totalCount == boxCount || totalCount < boxCount){
          }else{
-            setBoxcount( boxCount + cardWidth )
+            setBoxcount( boxCount + cardWidth + gap)
             setCount(count + 1)
          }
          
@@ -108,15 +133,10 @@ const Slider = (props) =>{
           }
 
     }
-    const getCardWidth = () =>{
-        const cardWidth = sliderWidth / split
-        return cardWidth + "px"
-    }
-
 
     return(
-        <section className="slider-container container">
-         <div style={{width : "100%"}} ref={sliderElement} className="slider" data-count={count}>
+        <section className={`slider-container ${Class}`}>
+         <div style={{width : "100%", border:"2px solid green"}} ref={sliderElement} className="slider" data-count={count}>
             {
                children.length > 0 &&
 
@@ -126,8 +146,10 @@ const Slider = (props) =>{
                              ref={cardElement} 
                              style={{
                                       right: boxCount,
-                                      minWidth: getCardWidth(),
-                                      transition: "right .2s"
+                                      minWidth: cardWidth + "px",
+                                      transition: "right .2s",
+                                      marginRight: gap + "px",
+                                      marginLeft: index === 0 && gap+"px"
                                       }} 
                              className="slider-card"
                              >
@@ -140,11 +162,13 @@ const Slider = (props) =>{
                 !children.length && children
             }
         </div>
-        <span onClick={moveRight} ref={rightBtn} className="slider-btn slider-btn-right">
+        <span style={{display: !rightButton && "none" }} onClick={moveRight} ref={rightBtn} className="slider-btn slider-btn-right">
              <i className="fa-solid fa-chevron-right arrow-icons"></i>
              </span>
 
-             <span onClick={moveLeft} ref={leftBtn} className="slider-btn slider-btn-left">
+             <span 
+               style={{display: !leftButton && "none" }} 
+             onClick={moveLeft} ref={leftBtn} className="slider-btn slider-btn-left">
              <i className="fa-solid fa-chevron-left arrow-icons"></i>
             </span>
         </section>

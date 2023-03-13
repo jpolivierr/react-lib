@@ -4,7 +4,11 @@ import Slider from "../../../lib/Slider/Slider"
 const Team = () =>{
     return(
 
-            <Slider>
+            <Slider 
+               Class="container"
+               gap={15}
+             
+            >
                  <div style={{background: "red", height: "300px"}}>
                     Card 1
                  </div>
