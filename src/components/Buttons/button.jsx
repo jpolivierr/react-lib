@@ -1,6 +1,6 @@
 import useScale from "../../lib/ClickEvents/scale/Scale"
 import useRipple from "../../lib/ClickEvents/ripple/ripple"
-import Loading from "../../lib/loadingEffect/loading/loading"
+import Loading from "../../lib/loadingEffect/loading/dualRing"
 
 const Buttons = (props) =>{
 
