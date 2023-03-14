@@ -1,5 +1,6 @@
 import useScale from "../../lib/ClickEvents/scale/Scale"
 import useRipple from "../../lib/ClickEvents/ripple/ripple"
+import Loading from "../../lib/loadingEffect/loading/loading"
 
 const Buttons = (props) =>{
 
@@ -11,9 +12,10 @@ const {target, href,Class,el,clickEvent,type} = props
     return(
            <a href={href && href} target={target && "_blank"}>
                 <button 
-                  style={{cursor: "pointer",position: "relative"}} 
+                  style={{cursor: "pointer",position: "relative", overflow: "hidden"}} 
                   type={type} onClick={(e)=>{scaleAnimation();rippleAnimation(e); clickEvent(e)}} 
                   className={`${Class} ${animation} ${rippleClass}`}>
+                    <Loading isShowing={true} />
                     {el}
                 </button>
            </a>
