@@ -8,6 +8,7 @@ import Map from "../../Sections/Map/Map"
 const Home = () =>{
     return(
         <>
+
             <Hero/>
             <Map/>
             <Example/>
