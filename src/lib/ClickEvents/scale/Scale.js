@@ -26,7 +26,7 @@ const useScale = () =>{
             const head = document.head
             const firstStyleElement = head.querySelectorAll("style")
             const el = document.createElement("style")
-                el.id = "avScaleStyle"
+                el.id = "avScaleleStyle"
                 el.innerHTML= style
         
             if(!firstStyleElement){
