@@ -7,7 +7,7 @@ const Ring = (props) =>{
 
     return isShowing && (
         <div className="av-loading">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
     )
 

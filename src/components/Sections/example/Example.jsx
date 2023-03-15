@@ -3,7 +3,7 @@ import SkeletonLoading from "../../../lib/loadingEffect/skeletonLoading/skeleton
 const Example = () =>{
 
     return(
-        <div style={{position: "relative"}} class="container">
+        <div style={{position: "relative"}} className="container">
             <SkeletonLoading isShowing={true}/>
 
         </div>
