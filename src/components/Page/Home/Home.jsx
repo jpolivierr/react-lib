@@ -11,7 +11,7 @@ const Home = () =>{
 
      
            <div style={{display: "flex",gap: "2rem"}}className="container">
-                 <Graphs name="colors"/>
+                 <Graphs name="colors" type="bar"/>
                  <Graphs name="map" type="pie"/>
            </div>
            

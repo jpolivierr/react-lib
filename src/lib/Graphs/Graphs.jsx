@@ -9,6 +9,10 @@ const Graphs = (props) =>{
 
     const [chartType, setCharType] = useState(!type ? 'bar' : type)
 
+    console.log(Chart.defaults.plugins.tooltip.enabled) 
+
+    Chart.defaults.plugins.tooltip.enabled = false
+    Chart.defaults.plugins.legend.position = "right"
 
     const chartConfig = {
                     type: chartType,
@@ -17,15 +21,42 @@ const Graphs = (props) =>{
                     datasets: [{
                         label: '# of Votes',
                         data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 2
-                    }]
+                        borderWidth: 1,
+                        backgroundColor: "rgb(255, 9, 101)",
+                        borderColor:"white"
                     },
-                    options: {
-                    scales: {
-                        y: {
-                        beginAtZero: true
-                        }
+                    {
+                        label: 'collor',
+                        data: [2, 16, 25, 15, 2, 3],
+                        borderWidth: 1,
+                        backgroundColor: "blue",
+                        borderColor:"white"
                     }
+                ]
+                    },
+                    
+                    options: {
+                        animation: false,
+                        plugins : {
+                            legend: {
+                                display: true,
+                                fontSize: 2
+                            }
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        scales: {
+                            y: {
+                                 beginAtZero: true
+                            }
+                        },
+                        legend: {
+                             labels: {
+                                fontColor: "green",
+                                size: 25
+                             }
+                        }
                     }
                 }
 
